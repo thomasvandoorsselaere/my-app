@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth'
+
+
 /**
  * Generated class for the StartPage page.
  *
@@ -38,6 +40,22 @@ export class StartPage {
       }
      
     })
+    
   }
 
+  newGame(){
+    this.navCtrl.push("GamePage")
+  }
+  
+  teams(){
+    this.navCtrl.push("TeamsPage")
+  }
+
+  history(){
+    this.navCtrl.push("HistoryPage")
+  }
+
+  credentials(){
+    this.navCtrl.push("CredentialsPage")
+  }
 }

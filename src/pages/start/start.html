@@ -7,12 +7,18 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>start</ion-title>
+    <ion-title>Basketball App</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+    <ion-list >
+        <button ion-item (click)="newGame()">New Game</button>
+        <button ion-item (click)="teams()">Teams</button>
+        <button ion-item (click)="history()">History</button>
+        <button ion-item (click)="credentials()">Credentials</button>
 
+      </ion-list>
 </ion-content>
