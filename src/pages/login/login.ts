@@ -29,7 +29,7 @@ export class LoginPage {
     try{
       const result = this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password)
       if(result){
-        this.navCtrl.push('RegisterPage')
+        this.navCtrl.setRoot('StartPage')
       }
       
     }

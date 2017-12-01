@@ -1,5 +1,3 @@
-
-
 export const FIREBASE_CONFIG =  
    {
     apiKey: "AIzaSyBgGrbLciRM28NLMYTKwy6tk62trloYdYI",
