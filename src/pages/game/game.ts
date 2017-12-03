@@ -27,6 +27,10 @@ export class GamePage {
     this.navCtrl.push("GameplayersPage")
   }
 
+  startGame(){
+    this.navCtrl.push("ActivegamePage")
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamePage');
   }
