@@ -1,6 +1,7 @@
 import {Player} from '../models/player'
 
 export interface Team {
-     name?: string;
+    id? : string 
+    name?: string;
      player?: Player[];
 }

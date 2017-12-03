@@ -16,6 +16,9 @@ import { Team } from '../../models/team';
 })
 export class TeamsPage {
   teams: Team[]
+  team: Team ={
+    name: ''
+  }
 
   constructor(
     private teamProvider: ProvidersTeamsProvider, 
@@ -24,6 +27,17 @@ export class TeamsPage {
   }
   teamPlayers(){
     this.navCtrl.push("TeamplayersPage")
+  }
+
+  onSubmit(){
+    if(this.team.name != ''){
+      this.teamProvider.addTeam(this.team)
+      this.team.name = ''
+    }
+  }
+
+  teamDelete(team){
+    this.teamProvider.deleteTeam(team);
   }
 
   ionViewDidLoad() {
