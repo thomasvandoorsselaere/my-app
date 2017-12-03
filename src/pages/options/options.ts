@@ -29,6 +29,7 @@ options: Gameoptions[]
     console.log('ionViewDidLoad OptionsPage');
     this.gameProvider.getOptions().subscribe(options =>{
       this.options = options
+      console.log(options)
     })
   }
 

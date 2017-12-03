@@ -14,30 +14,34 @@
 
 
 <ion-content padding>
-    <ion-list>
+  <form>  
+  <ion-list>
+      <div *ngIf="options">
           <ion-item>
             <ion-label>Points</ion-label>
-            <ion-toggle [(ngModel)]="points"></ion-toggle>
+            <ion-toggle [(ngModel)]="options.points" name="points"></ion-toggle>
           </ion-item>
           <ion-item>
             <ion-label>Rebounds</ion-label>
-            <ion-toggle [(ngModel)]="rebounds"></ion-toggle>
+            <ion-toggle [(ngModel)]="options.rebounds" name="rebounds"></ion-toggle>
           </ion-item>
           <ion-item>
             <ion-label>Assists</ion-label>
-            <ion-toggle [(ngModel)]="assists"></ion-toggle>
+            <ion-toggle [(ngModel)]="options.assists" name="assists"></ion-toggle>
           </ion-item>
           <ion-item>
              <ion-label>Steals</ion-label>
-             <ion-toggle [(ngModel)]="steals"></ion-toggle>
+             <ion-toggle [(ngModel)]="options.steals" name="steals"></ion-toggle>
           </ion-item>
           <ion-item>
               <ion-label>Blocks</ion-label>
-              <ion-toggle [(ngModel)]="blocks"></ion-toggle>
+              <ion-toggle [(ngModel)]="options.blocks" name="blocks"></ion-toggle>
            </ion-item>
            <ion-item>
-              <ion-label>Turnovers</ion-label>
-              <ion-toggle [(ngModel)]="turnovers"></ion-toggle>
-           </ion-item>
-        </ion-list>
+             <ion-label>Turnovers</ion-label>
+             <ion-toggle [(ngModel)]="options.turnovers" name="turnovers"></ion-toggle>
+          </ion-item>
+      </div>
+    </ion-list>
+  </form>
 </ion-content>
