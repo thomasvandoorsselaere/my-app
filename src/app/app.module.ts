@@ -6,8 +6,6 @@ import { AngularFireAuthModule } from "angularfire2/auth"
 import { AngularFirestoreModule} from "angularfire2/firestore"
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -18,9 +16,8 @@ import { ProvidersGameProvider } from '../providers/providers-game/providers-gam
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage,
-    ListPage
+    MyApp
+
   ],
   imports: [
     BrowserModule,
@@ -31,9 +28,7 @@ import { ProvidersGameProvider } from '../providers/providers-game/providers-gam
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage,
-    ListPage
+    MyApp
   ],
   providers: [
     StatusBar,
