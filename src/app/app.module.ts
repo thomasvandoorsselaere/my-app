@@ -13,6 +13,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FIREBASE_CONFIG } from './app.firebase.config';
 import { ProvidersTeamsProvider } from '../providers/providers-teams/providers-teams';
+import { ProvidersGameProvider } from '../providers/providers-game/providers-game';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { ProvidersTeamsProvider } from '../providers/providers-teams/providers-t
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ProvidersTeamsProvider
+    ProvidersTeamsProvider,
+    ProvidersGameProvider,
+    
   ]
 })
 export class AppModule {}

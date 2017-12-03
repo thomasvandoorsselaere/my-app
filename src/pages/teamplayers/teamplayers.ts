@@ -18,16 +18,29 @@ import { Player } from '../../models/player'
 })
 export class TeamplayersPage {
   players: Player[] 
+  player: Player ={
+    name: ''
+  }
+  team: any
+  
 
   constructor(
     private teamProvider: ProvidersTeamsProvider, 
     public navCtrl: NavController, 
-    public navParams: NavParams) {
+    public navParams: NavParams,) {
+
+      this.team = navParams.get("param1")
   }
+
+  // onSubmit(player, team){
+  //   if(this.player.name != ''){
+  //     this.teamProvider.addPlayer(this.player)
+  //     this.player.name = ''
+  //   }
+  // }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeamplayersPage');
-
     this.teamProvider.getPlayers().subscribe(players => {
       this.players = players
     })

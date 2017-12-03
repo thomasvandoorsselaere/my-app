@@ -17,4 +17,13 @@
     <ion-list>
         <button ion-item *ngFor="let player of players" >{{ player.name }} </button>  
       </ion-list>
+
+      <form (ngSubmit)="onSubmit()">
+          <ion-item>
+              <ion-label fixed>New Player</ion-label>
+              <ion-input type="text" [(ngModel)]="player.name" name="name"></ion-input>
+            </ion-item>
+            <br>
+            <button type="submit" ion-button color="light">Add Player</button>
+          </form>
 </ion-content>

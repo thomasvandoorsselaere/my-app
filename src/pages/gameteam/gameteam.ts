@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the GamePage page.
+ * Generated class for the GameteamPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,26 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-game',
-  templateUrl: 'game.html',
+  selector: 'page-gameteam',
+  templateUrl: 'gameteam.html',
 })
-export class GamePage {
+export class GameteamPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-
-  gameTeam(){
-    this.navCtrl.push("GameteamPage")
-  }
-
-  gamePlayers(){
-    this.navCtrl.push("GameplayersPage")
-  }
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad GamePage');
+    console.log('ionViewDidLoad GameteamPage');
   }
-
 
 }

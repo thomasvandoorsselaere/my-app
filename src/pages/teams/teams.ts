@@ -26,7 +26,9 @@ export class TeamsPage {
     public navParams: NavParams) {
   }
   teamPlayers(){
-    this.navCtrl.push("TeamplayersPage")
+    this.navCtrl.push("TeamplayersPage",{
+      param1: this.team.id
+    })
   }
 
   onSubmit(){
