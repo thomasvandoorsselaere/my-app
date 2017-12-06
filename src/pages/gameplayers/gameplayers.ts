@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
+import { Player } from '../../models/player';
 
 /**
  * Generated class for the GameplayersPage page.
@@ -14,8 +17,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'gameplayers.html',
 })
 export class GameplayersPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  playersCollection: AngularFirestoreCollection<Player>
+  players: Observable<Player[]>
+  
+  constructor(
+    public afs: AngularFirestore,
+    public navCtrl: NavController, 
+    public navParams: NavParams) {
+     // this.playersCollection = this.afs.collection<Player>('players',ref =>{
+    //   return ref .where('team', '==', 'BBC Zele B')
+    // })
+    // this.players = this.playersCollection.valueChanges()
   }
 
   ionViewDidLoad() {

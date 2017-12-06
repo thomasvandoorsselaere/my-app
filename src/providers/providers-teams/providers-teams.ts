@@ -18,11 +18,12 @@ export class ProvidersTeamsProvider {
   teams: Observable<Team[]>
   players: Observable<Player[]>
   teamDoc: AngularFirestoreDocument<Team>
+  playerDoc: AngularFirestoreDocument<Player>
+
 
   constructor(public afs: AngularFirestore) {
     this.teamsCollection = this.afs.collection('team')
 
-    // this.teams = this.afs.collection('team').valueChanges()
     this.teams = this.teamsCollection.snapshotChanges().map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Team
@@ -31,7 +32,19 @@ export class ProvidersTeamsProvider {
       })
     })
 
-    this.players = this.afs.collection('players').valueChanges()
+    // this.playersCollection = this.afs.collection<Player>('players',ref =>{
+    //   return ref .where('team', '==', 'BBC Zele B')
+    // })
+    // this.players = this.playersCollection.valueChanges()
+    this.playersCollection = this.afs.collection('players')
+    this.players = this.playersCollection.snapshotChanges().map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as Player
+        data.id = a.payload.doc.id
+        return data
+      })
+    })
+    
   }
 
   getTeams(){
@@ -42,6 +55,10 @@ export class ProvidersTeamsProvider {
     return this.players
   }
 
+  getPlayerByTeam(team: any){
+    return this.players
+  }
+
   addTeam(team: Team){
     this.teamsCollection.add(team)
   }
@@ -49,6 +66,16 @@ export class ProvidersTeamsProvider {
   deleteTeam(team: Team){
     this.teamDoc = this.afs.doc(`team/${team.id}`)
     this.teamDoc.delete()
+  }
+
+  addPlayer(player: Player, teamName: any){
+    player.team = teamName
+    this.playersCollection.add(player)
+  }
+
+  deletePlayer(player: Player){
+    this.playerDoc = this.afs.doc(`players/${player.id}`)
+    this.playerDoc.delete()
   }
 
 }

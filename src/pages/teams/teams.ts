@@ -17,17 +17,19 @@ import { Team } from '../../models/team';
 export class TeamsPage {
   teams: Team[]
   team: Team ={
-    name: ''
+    
   }
+
 
   constructor(
     private teamProvider: ProvidersTeamsProvider, 
     public navCtrl: NavController,
     public navParams: NavParams) {
   }
-  teamPlayers(){
+  teamPlayers(team){
     this.navCtrl.push("TeamplayersPage",{
-      param1: this.team.id
+      
+      teamName: team.name
     })
   }
 

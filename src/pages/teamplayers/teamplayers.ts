@@ -21,7 +21,7 @@ export class TeamplayersPage {
   player: Player ={
     name: ''
   }
-  team: any
+  teamName: any
   
 
   constructor(
@@ -29,21 +29,25 @@ export class TeamplayersPage {
     public navCtrl: NavController, 
     public navParams: NavParams,) {
 
-      this.team = navParams.get("param1")
+      this.teamName = navParams.get("teamName")
+
+      
   }
 
-  // onSubmit(player, team){
-  //   if(this.player.name != ''){
-  //     this.teamProvider.addPlayer(this.player)
-  //     this.player.name = ''
-  //   }
-  // }
+  onSubmit(player, team){
+    if(this.player.name != ''){
+      this.teamProvider.addPlayer(this.player, this.teamName)
+      this.player.name = ''
+      
+    }
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeamplayersPage');
     this.teamProvider.getPlayers().subscribe(players => {
       this.players = players
     })
+    
   }
 
 }
