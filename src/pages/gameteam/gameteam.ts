@@ -24,6 +24,13 @@ export class GameteamPage {
      public navParams: NavParams) {
   }
 
+  teamGame(team){
+    this.navCtrl.push("GamePage",{
+      
+      teamName: team.name
+    })
+  }
+
     ionViewDidLoad() {
       console.log('ionViewDidLoad GameteamPage');
        this.teamProvider.getTeams().subscribe(teams => {

@@ -14,8 +14,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'game.html',
 })
 export class GamePage {
+teamName : any
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.teamName = navParams.get("teamName")
   }
 
 
@@ -24,7 +26,9 @@ export class GamePage {
   }
 
   gamePlayers(){
-    this.navCtrl.push("GameplayersPage")
+    this.navCtrl.push("GameplayersPage", {
+      teamNamePlayers: this.teamName
+    })
   }
 
   startGame(){
@@ -33,6 +37,7 @@ export class GamePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamePage');
+    console.log(this.teamName)
   }
 
 

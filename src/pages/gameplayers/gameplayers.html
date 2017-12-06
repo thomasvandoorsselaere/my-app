@@ -14,5 +14,8 @@
 
 
 <ion-content padding>
-
+  <ion-list *ngFor="let player of players">
+    <ion-label>{{ player.name }} </ion-label>  
+    <ion-toggle></ion-toggle>
+  </ion-list>
 </ion-content>
