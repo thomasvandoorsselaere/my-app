@@ -24,7 +24,6 @@ export class GameplayersPage {
 
   constructor(
     private teamProvider: ProvidersTeamsProvider,
-    public afs: AngularFirestore,
     public navCtrl: NavController, 
     public navParams: NavParams) {
 

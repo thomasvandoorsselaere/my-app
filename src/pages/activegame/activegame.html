@@ -14,5 +14,41 @@
 
 
 <ion-content padding>
-
+ <ion-card *ngFor="let player of players">
+   <ion-card-header (click)="toggleCard()">{{player.name}}</ion-card-header>
+   <ion-card-content #cc>
+    <div *ngIf="options">
+      <ion-item>
+        <ion-label>Points</ion-label>
+        <ion-icon name="arrow-round-up"></ion-icon>
+        <ion-icon name="arrow-round-down"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label>Rebounds</ion-label>
+        <ion-icon name="arrow-round-up"></ion-icon>
+        <ion-icon name="arrow-round-down"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label>Assists</ion-label>
+        <ion-icon name="arrow-round-up"></ion-icon>
+        <ion-icon name="arrow-round-down"></ion-icon>
+      </ion-item>
+      <ion-item>
+         <ion-label>Steals</ion-label>
+         <ion-icon name="arrow-round-up"></ion-icon>
+         <ion-icon name="arrow-round-down"></ion-icon>
+      </ion-item>
+      <ion-item>
+          <ion-label>Blocks</ion-label>
+          <ion-icon name="arrow-round-up"></ion-icon>
+          <ion-icon name="arrow-round-down"></ion-icon>
+       </ion-item>
+       <ion-item>
+         <ion-label>Turnovers</ion-label>
+         <ion-icon name="arrow-round-up"></ion-icon>
+         <ion-icon name="arrow-round-down"></ion-icon>
+      </ion-item>
+  </div>
+   </ion-card-content>
+ </ion-card>
 </ion-content>
