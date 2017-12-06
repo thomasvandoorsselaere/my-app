@@ -42,6 +42,10 @@ export class TeamplayersPage {
     }
   }
 
+  playerDelete(player){
+    this.teamProvider.deletePlayer(player);
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeamplayersPage');
     this.teamProvider.getPlayers().subscribe(players => {
