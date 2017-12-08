@@ -33,6 +33,7 @@ teamName : any
 
   startGame(){
     this.navCtrl.push("ActivegamePage")
+    
   }
 
   ionViewDidLoad() {

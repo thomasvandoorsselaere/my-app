@@ -51,9 +51,13 @@ export class ProvidersTeamsProvider {
     return this.teams
   }
 
-  getPlayers(){
-    return this.players
+  getPlayers(team){
+    return this.players.map(x => x.filter(y => y.team === team))
   }
+ 
+
+   
+  
 
   getPlayerByTeam(team: any){
     return this.players

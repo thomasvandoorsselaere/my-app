@@ -33,7 +33,7 @@ export class GameplayersPage {
     console.log('ionViewDidLoad GameplayersPage');
     console.log(this.teamName)
     
-    this.teamProvider.getPlayers().subscribe(players => {
+    this.teamProvider.getPlayers(this.teamName).subscribe(players => {
       this.players = players
     })
     

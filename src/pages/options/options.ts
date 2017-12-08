@@ -16,7 +16,7 @@ import { Gameoptions } from '../../models/gameoptions';
   templateUrl: 'options.html',
 })
 export class OptionsPage {
-options: Gameoptions[]
+options: Gameoptions
 
 
   constructor(
@@ -28,7 +28,7 @@ options: Gameoptions[]
   ionViewDidLoad() {
     console.log('ionViewDidLoad OptionsPage');
     this.gameProvider.getOptions().subscribe(options =>{
-      this.options = options
+      this.options = options[0]
       console.log(options)
     })
   }

@@ -15,6 +15,9 @@ export class ProvidersGameProvider {
   optionCollection : AngularFirestoreCollection<Gameoptions>
   Gameoptions: Observable<Gameoptions[]>
 
+  // array doorsturen is niet correct je hebt de [0] waarde nodig van die array
+
+
   constructor(public afs: AngularFirestore) {
       // this.Gameoptions = this.afs.collection('gameoptions').valueChanges()
       this.optionCollection = this.afs.collection('gameoptions')
@@ -26,6 +29,7 @@ export class ProvidersGameProvider {
             return data
           })
         })
+
   }
 
   getOptions(){

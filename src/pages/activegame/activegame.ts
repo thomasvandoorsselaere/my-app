@@ -44,7 +44,7 @@ export class ActivegamePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivegamePage');
-    this.teamProvider.getPlayers().subscribe(players => {
+    this.teamProvider.getPlayers(test).subscribe(players => {
       this.players = players
   })
   this.gameProvider.getOptions().subscribe(options =>{
