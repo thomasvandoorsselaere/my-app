@@ -16,8 +16,6 @@
 <ion-content padding>
   <ion-item *ngFor="let player of players">
     <ion-label>{{ player.name }}</ion-label>  
-    <ion-checkbox></ion-checkbox>
+    <ion-toggle [checked]="player.status" (ionChange)="selectedPlayers(player)"></ion-toggle>
   </ion-item>
-
-  <button (click)="selectedPlayers()">Select players</button>
 </ion-content>

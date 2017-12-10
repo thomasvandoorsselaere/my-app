@@ -31,6 +31,8 @@ export class ActivegamePage {
     private teamProvider: ProvidersTeamsProvider,
     public navCtrl: NavController, 
     public navParams: NavParams) {
+
+      this.team = navParams.get("teamNameUsed")
   }
 
   toggleCard(){
@@ -41,16 +43,21 @@ export class ActivegamePage {
         
     }
     this.cardExpanded = !this.cardExpanded
-    
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivegamePage');
-    this.teamProvider.getPlayers(this.team).subscribe(players => {
-      this.players = players
+
+  this.teamProvider.getPlayers(this.team).subscribe(players => {
+    this.players = players
   })
+
+    console.log(this.players)
   this.gameProvider.getOptions().subscribe(options =>{
     this.options = options
   })
+
+    console.log(this.options)
+
 }
 }

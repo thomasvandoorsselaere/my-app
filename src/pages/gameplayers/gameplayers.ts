@@ -31,8 +31,9 @@ export class GameplayersPage {
       this.teamName = navParams.get("teamNamePlayers")
   }
 
-  selectedPlayers(){
-    
+  selectedPlayers(player){
+    player.status = !player.status
+    this.teamProvider.updatePlayer(player)
   }
 
   ionViewDidLoad() {

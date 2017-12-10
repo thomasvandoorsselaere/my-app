@@ -36,8 +36,10 @@ teamName : any
   }
 
   startGame(){
-    this.navCtrl.push("ActivegamePage")
-    
+    this.navCtrl.push("ActivegamePage",{
+      teamNameUsed: this.teamName
+    })
+     
   }
 
   ionViewDidLoad() {

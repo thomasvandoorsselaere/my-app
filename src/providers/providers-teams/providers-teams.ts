@@ -47,7 +47,7 @@ export class ProvidersTeamsProvider {
     return this.teams
   }
 
-  getPlayers(team){
+  getPlayers(team: Team){
     return this.players.map(x => x.filter(y => y.team === team))
   }
 
@@ -73,5 +73,10 @@ export class ProvidersTeamsProvider {
     this.playerDoc = this.afs.doc(`players/${player.id}`)
     this.playerDoc.delete()
   }
+
+  updatePlayer(player: Player){
+    this.playerDoc = this.afs.doc(`players/${player.id}`)
+    this.playerDoc.update(player)
+   }
 
 }
