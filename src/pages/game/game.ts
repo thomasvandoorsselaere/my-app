@@ -31,6 +31,10 @@ teamName : any
     })
   }
 
+  gameOptions(){
+    this.navCtrl.push("GameoptionsPage")
+  }
+
   startGame(){
     this.navCtrl.push("ActivegamePage")
     

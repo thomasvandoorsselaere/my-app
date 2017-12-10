@@ -14,6 +14,7 @@ import { Game } from '../../models/game';
 @Injectable()
 export class ProvidersGameProvider {
   optionCollection : AngularFirestoreCollection<Gameoptions>
+  optionDoc: AngularFirestoreDocument<Gameoptions>
   Gameoptions: Observable<Gameoptions[]>
   gameHistory: Observable<Game[]>
   gameHistoryCollection: AngularFirestoreCollection<Game>
@@ -49,9 +50,9 @@ export class ProvidersGameProvider {
     return this.Gameoptions
   }
 
-  updateOptions(){
-    this.Gameoptions[0] = this.afs.doc(`gameoptions\${gameoptions.id`) 
-    this.Gameoptions[0].update()
+  updateOptions(option: Gameoptions){
+   this.optionDoc = this.afs.doc(`gameoptions/${option.id}`)
+   this.optionDoc.update(option)
   }
 
   getHistory(){

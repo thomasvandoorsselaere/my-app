@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ProvidersGameProvider } from '../../providers/providers-game/providers-game';
 import { Gameoptions } from '../../models/gameoptions';
+import { ProvidersGameProvider } from '../../providers/providers-game/providers-game';
 
 /**
- * Generated class for the OptionsPage page.
+ * Generated class for the GameoptionsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -12,29 +12,30 @@ import { Gameoptions } from '../../models/gameoptions';
 
 @IonicPage()
 @Component({
-  selector: 'page-options',
-  templateUrl: 'options.html',
+  selector: 'page-gameoptions',
+  templateUrl: 'gameoptions.html',
 })
-export class OptionsPage {
+export class GameoptionsPage {
 options: Gameoptions[]
-
 
   constructor(
     private gameProvider: ProvidersGameProvider,
-    public navCtrl: NavController,
+    public navCtrl: NavController, 
     public navParams: NavParams) {
   }
 
   changeToggle(option){
+    option.status = !option.status
     this.gameProvider.updateOptions(option)
   }
 
+
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OptionsPage');
+    console.log('ionViewDidLoad GameoptionsPage');
     this.gameProvider.getOptions().subscribe(options =>{
       this.options = options
-      console.log(options)
     })
+    console.log(this.options)
   }
 
 }

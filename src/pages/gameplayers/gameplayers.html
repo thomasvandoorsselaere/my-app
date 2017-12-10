@@ -14,10 +14,10 @@
 
 
 <ion-content padding>
-  <ion-list *ngFor="let player of players">
+  <ion-item *ngFor="let player of players">
     <ion-label>{{ player.name }}</ion-label>  
     <ion-checkbox></ion-checkbox>
-  </ion-list>
+  </ion-item>
 
   <button (click)="selectedPlayers()">Select players</button>
 </ion-content>

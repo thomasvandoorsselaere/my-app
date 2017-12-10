@@ -20,6 +20,7 @@ import { ProvidersTeamsProvider } from '../../providers/providers-teams/provider
 export class GameplayersPage {
  
   players: Player[]
+  gamePlayers: Player[]
   teamName: any
 
   constructor(

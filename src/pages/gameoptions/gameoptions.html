@@ -1,0 +1,25 @@
+<!--
+  Generated template for the GameoptionsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>gameoptions</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <form>
+        <div *ngFor="let option of options">
+          <label>{{option.name}}</label>
+          <ion-toggle [checked]="option.status" (ionChange)="changeToggle(option)"></ion-toggle>
+        </div>
+    </form>
+  </ion-list>
+</ion-content>

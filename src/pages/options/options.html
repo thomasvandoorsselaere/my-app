@@ -14,34 +14,12 @@
 
 
 <ion-content padding>
-  <form>  
-  <ion-list>
-      <div *ngIf="options">
-          <ion-item>
-            <ion-label>Points</ion-label>
-            <ion-toggle [(ngModel)]="options.points" name="points" (ionChange)="toggleOption()"></ion-toggle>
-          </ion-item>
-          <ion-item>
-            <ion-label>Rebounds</ion-label>
-            <ion-toggle [(ngModel)]="options.rebounds" name="rebounds"></ion-toggle>
-          </ion-item>
-          <ion-item>
-            <ion-label>Assists</ion-label>
-            <ion-toggle [(ngModel)]="options.assists" name="assists"></ion-toggle>
-          </ion-item>
-          <ion-item>
-             <ion-label>Steals</ion-label>
-             <ion-toggle [(ngModel)]="options.steals" name="steals"></ion-toggle>
-          </ion-item>
-          <ion-item>
-              <ion-label>Blocks</ion-label>
-              <ion-toggle [(ngModel)]="options.blocks" name="blocks"></ion-toggle>
-           </ion-item>
-           <ion-item>
-             <ion-label>Turnovers</ion-label>
-             <ion-toggle [(ngModel)]="options.turnovers" name="turnovers"></ion-toggle>
-          </ion-item>
+    
+    <form>
+      <div *ngFor="let option of options">
+        <label>{{option.name}}</label>
+        <ion-toggle [checked]="option.status" (ionChange)="changeToggle(option)"></ion-toggle>
       </div>
-    </ion-list>
   </form>
+
 </ion-content>
