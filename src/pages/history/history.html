@@ -14,5 +14,7 @@
 
 
 <ion-content padding>
-
+  <p *ngFor="let game of games">
+   {{game.date}} {{game.players.name}}
+  </p>
 </ion-content>

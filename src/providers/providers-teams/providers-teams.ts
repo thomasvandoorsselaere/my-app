@@ -32,10 +32,6 @@ export class ProvidersTeamsProvider {
       })
     })
 
-    // this.playersCollection = this.afs.collection<Player>('players',ref =>{
-    //   return ref .where('team', '==', 'BBC Zele B')
-    // })
-    // this.players = this.playersCollection.valueChanges()
     this.playersCollection = this.afs.collection('players')
     this.players = this.playersCollection.snapshotChanges().map(changes => {
       return changes.map(a => {
@@ -54,10 +50,6 @@ export class ProvidersTeamsProvider {
   getPlayers(team){
     return this.players.map(x => x.filter(y => y.team === team))
   }
- 
-
-   
-  
 
   getPlayerByTeam(team: any){
     return this.players

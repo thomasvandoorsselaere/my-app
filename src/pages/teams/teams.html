@@ -17,9 +17,9 @@
     <ion-list>
       <ion-item *ngFor="let team of teams">
         <button  (click)="teamPlayers(team)"> {{team.name}}</button>
-        <button (click)="teamDelete(team)">Remove</button>
+        <ion-icon name="trash" (click)="teamDelete(team)"></ion-icon>
       </ion-item>
-        <!-- <button ion-item *ngFor="let team of teams" (click)="teamPlayers()">{{ team.name }} </button> -->
+        
       </ion-list>
       <br>
       <form (ngSubmit)="onSubmit()">

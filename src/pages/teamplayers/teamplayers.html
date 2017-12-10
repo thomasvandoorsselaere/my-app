@@ -15,9 +15,9 @@
 
 <ion-content padding>
     <ion-list>
-        <button ion-item *ngFor="let player of players">{{ player.name }} 
+         <ion-item *ngFor="let player of players">{{ player.name }} 
           <ion-icon name="trash" (click)="playerDelete(player)"></ion-icon>
-        </button> 
+         </ion-item> 
     </ion-list>
 
       <form (ngSubmit)="onSubmit()">

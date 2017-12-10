@@ -4,6 +4,7 @@ import { ProvidersTeamsProvider } from '../../providers/providers-teams/provider
 import { Player } from '../../models/player';
 import { ProvidersGameProvider } from '../../providers/providers-game/providers-game';
 import { Gameoptions } from '../../models/gameoptions';
+import { Team } from '../../models/team';
 
 /**
  * Generated class for the ActivegamePage page.
@@ -19,6 +20,7 @@ import { Gameoptions } from '../../models/gameoptions';
 })
 export class ActivegamePage {
   players: Player[]
+  team: Team
   options: Gameoptions[]
   cardExpanded: boolean= false
   @ViewChild("cc") cardContent:any
@@ -44,7 +46,7 @@ export class ActivegamePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivegamePage');
-    this.teamProvider.getPlayers(test).subscribe(players => {
+    this.teamProvider.getPlayers(this.team).subscribe(players => {
       this.players = players
   })
   this.gameProvider.getOptions().subscribe(options =>{

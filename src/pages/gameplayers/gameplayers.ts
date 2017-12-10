@@ -26,7 +26,12 @@ export class GameplayersPage {
     private teamProvider: ProvidersTeamsProvider,
     public navCtrl: NavController, 
     public navParams: NavParams) {
+      
+      this.teamName = navParams.get("teamNamePlayers")
+  }
 
+  selectedPlayers(){
+    
   }
 
   ionViewDidLoad() {
@@ -36,6 +41,10 @@ export class GameplayersPage {
     this.teamProvider.getPlayers(this.teamName).subscribe(players => {
       this.players = players
     })
+
+
+
+
     
   }
 

@@ -25,6 +25,10 @@ options: Gameoptions
     public navParams: NavParams) {
   }
 
+  toggleOption(){
+    this.gameProvider.updateOptions()
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad OptionsPage');
     this.gameProvider.getOptions().subscribe(options =>{
