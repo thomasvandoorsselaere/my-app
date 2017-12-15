@@ -5,6 +5,8 @@ import { Player } from '../../models/player';
 import { ProvidersGameProvider } from '../../providers/providers-game/providers-game';
 import { Gameoptions } from '../../models/gameoptions';
 import { Team } from '../../models/team';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the ActivegamePage page.
@@ -19,9 +21,14 @@ import { Team } from '../../models/team';
   templateUrl: 'activegame.html',
 })
 export class ActivegamePage {
-  players: Player[]
+  optionCollection : AngularFirestoreCollection<Gameoptions>
+  options: Observable<Gameoptions[]>
+
+  playersCollection: AngularFirestoreCollection<Player>
+  players: Observable<Player[]>
+  filteredPlayers: Observable<Player[]>
+
   team: Team
-  options: Gameoptions[]
   cardExpanded: boolean= false
   @ViewChild("cc") cardContent:any
 
@@ -30,7 +37,30 @@ export class ActivegamePage {
     private gameProvider: ProvidersGameProvider,
     private teamProvider: ProvidersTeamsProvider,
     public navCtrl: NavController, 
+    public afs: AngularFirestore,
     public navParams: NavParams) {
+
+      this.options = this.afs.collection('gameoptions').valueChanges()
+      this.optionCollection = this.afs.collection('gameoptions')
+      
+          this.options = this.optionCollection.snapshotChanges().map(changes => {
+          return changes.map(a => {
+            const data = a.payload.doc.data() as Gameoptions
+            data.id = a.payload.doc.id
+            return data
+          })
+        })
+    
+        this.playersCollection = this.afs.collection('players')
+        this.players = this.playersCollection.snapshotChanges().map(changes => {
+          return changes.map(a => {
+            const data = a.payload.doc.data() as Player
+            data.id = a.payload.doc.id
+            return data
+          })
+        })
+  
+
 
       this.team = navParams.get("chosenTeam")
   }
@@ -45,19 +75,12 @@ export class ActivegamePage {
     this.cardExpanded = !this.cardExpanded
   }
 
+  filterplayers(team){
+    return this.players.map(x => x.filter(y => y.team === team))
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivegamePage');
-
-  this.teamProvider.getPlayers(this.team.name).subscribe(players => {
-    this.players = players
-  })
-
-    console.log(this.players)
-  this.gameProvider.getOptions().subscribe(options =>{
-    this.options = options
-  })
-
-    console.log(this.options)
-
+    this.filteredPlayers = this.filterplayers(this.team)
+    
 }
 }
