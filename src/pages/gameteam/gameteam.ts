@@ -4,6 +4,7 @@ import { ProvidersTeamsProvider } from '../../providers/providers-teams/provider
 import { Team } from '../../models/team';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 /**
  * Generated class for the GameteamPage page.
@@ -20,10 +21,13 @@ import { Observable } from 'rxjs/Observable';
 export class GameteamPage {
   teamsCollection: AngularFirestoreCollection<Team>
   teams: Observable<Team[]>
+  filteredTeams: Observable<Team[]>
+  UserId: string
 
   constructor(
     private teamProvider: ProvidersTeamsProvider,
     public navCtrl: NavController,
+    private afAuth: AngularFireAuth,
     public afs: AngularFirestore,
      public navParams: NavParams) {
       this.teamsCollection = this.afs.collection('team')
@@ -36,6 +40,7 @@ export class GameteamPage {
          })
        })
 
+       this.UserId = this.afAuth.auth.currentUser.uid
  
   }
 
@@ -47,10 +52,13 @@ export class GameteamPage {
 
   }
 
-  
+  filterteams(UserId){
+    return this.teams.map(x => x.filter(y => y.userid === UserId))
+   }
 
   ionViewWillEnter() {
       console.log('ionViewDidLoad GameteamPage');
+      this.filteredTeams = this.filterteams(this.UserId)
   }
 }
 

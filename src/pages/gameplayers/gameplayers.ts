@@ -61,7 +61,7 @@ export class GameplayersPage {
     console.log('ionViewDidLoad GameplayersPage');
     this.filteredPlayers = this.filterplayers(this.chosenTeam)
 
-
+    
 
     
   }

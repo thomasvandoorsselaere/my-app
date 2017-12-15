@@ -15,7 +15,7 @@
 
 <ion-content padding>
     <ion-list>
-        <ion-item *ngFor="let team of teams | async">
+        <ion-item *ngFor="let team of filteredTeams | async">
           <button (click)="teamGame(team)"> {{team.name}}</button>
         </ion-item>
     </ion-list>

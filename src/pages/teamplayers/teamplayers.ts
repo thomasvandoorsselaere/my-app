@@ -69,6 +69,8 @@ export class TeamplayersPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeamplayersPage');
     this.filteredPlayers = this.filterplayers(this.teamName)
+
+    
   }
 
 }

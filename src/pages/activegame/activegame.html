@@ -15,15 +15,16 @@
 <ion-content padding>
  <ion-card *ngFor="let player of filteredPlayers | async">
     <div *ngIf="player.status">
-    <ion-card-header (click)="toggleCard()">{{player.name}}<i class="ion-arrow-down-b"></i></ion-card-header>
+    <ion-card-header (click)="toggleCard()">{{player.name}}
+        <ion-icon end name="arrow-dropdown" style="float:right"></ion-icon>
+    </ion-card-header>
     <ion-card-content #cc>
        <div *ngFor="let option of options | async">
            <div *ngIf="option.status">  
               <ion-item>
                   <ion-label color="primary">{{option.name}}</ion-label>
-                  <ion-input placeholder="Text Input"></ion-input>
-                  <i class="icon ion-plus"></i>
-                  <i class="icon ion-minus"></i>
+                  <ion-input placeholder="{{option.name}}" text-align: center></ion-input>
+                  <button ion-button round>+</button>
                 </ion-item>
        </div>
      </div>

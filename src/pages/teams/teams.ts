@@ -5,6 +5,7 @@ import { Team } from '../../models/team';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from 'angularfire2/firestore';
 import { Player } from '../../models/player';
 import { Observable } from 'rxjs/Observable';
+import { AngularFireAuth } from 'angularfire2/auth';
 /**
  * Generated class for the TeamsPage page.
  *
@@ -20,13 +21,15 @@ import { Observable } from 'rxjs/Observable';
 export class TeamsPage {
   teamsCollection: AngularFirestoreCollection<Team>
   teams: Observable<Team[]>
+  filteredTeams: Observable<Team[]>
   teamDoc: AngularFirestoreDocument<Team>
- 
+  UserId: string
   team: Team ={
   }
 
   constructor(
     private teamProvider: ProvidersTeamsProvider, 
+    private afAuth: AngularFireAuth,
     public navCtrl: NavController,
     public afs: AngularFirestore,
     public navParams: NavParams) {
@@ -39,6 +42,8 @@ export class TeamsPage {
            return data
          })
        })
+       this.UserId = this.afAuth.auth.currentUser.uid
+       
   }
 
   
@@ -54,11 +59,15 @@ export class TeamsPage {
   
   onSubmit(){
     if(this.team.name != ''){
+      this.team.userid = this.afAuth.auth.currentUser.uid
       this.teamProvider.addTeam(this.team)
       this.team.name = ''
     }
   }
 
+  filterteams(UserId){
+   return this.teams.map(x => x.filter(y => y.userid === UserId))
+  }
  
  
   teamDelete(team){
@@ -69,9 +78,8 @@ export class TeamsPage {
   
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeamsPage');
-
-
-
+    console.log(this.UserId)
+    this.filteredTeams = this.filterteams(this.UserId)
 
   }
 
