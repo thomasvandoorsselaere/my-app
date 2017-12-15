@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ProvidersTeamsProvider } from '../../providers/providers-teams/providers-teams';
 import { Team } from '../../models/team';
+import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from 'angularfire2/firestore';
+import { Player } from '../../models/player';
+import { Observable } from 'rxjs/Observable';
 /**
  * Generated class for the TeamsPage page.
  *
@@ -15,17 +18,31 @@ import { Team } from '../../models/team';
   templateUrl: 'teams.html',
 })
 export class TeamsPage {
-  teams: Team[]
+  teamsCollection: AngularFirestoreCollection<Team>
+  teams: Observable<Team[]>
+  teamDoc: AngularFirestoreDocument<Team>
+ 
   team: Team ={
-    
   }
-
 
   constructor(
     private teamProvider: ProvidersTeamsProvider, 
     public navCtrl: NavController,
+    public afs: AngularFirestore,
     public navParams: NavParams) {
+      this.teamsCollection = this.afs.collection('team')
+      
+       this.teams = this.teamsCollection.snapshotChanges().map(changes => {
+         return changes.map(a => {
+           const data = a.payload.doc.data() as Team
+           data.id = a.payload.doc.id
+           return data
+         })
+       })
   }
+
+  
+  
   teamPlayers(team){
     this.navCtrl.push("TeamplayersPage",{
       
@@ -33,6 +50,8 @@ export class TeamsPage {
     })
   }
 
+  
+  
   onSubmit(){
     if(this.team.name != ''){
       this.teamProvider.addTeam(this.team)
@@ -40,17 +59,17 @@ export class TeamsPage {
     }
   }
 
+ 
+ 
   teamDelete(team){
     this.teamProvider.deleteTeam(team);
   }
 
+  
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeamsPage');
 
-    this.teamProvider.getTeams().subscribe(teams => {
-      // console.log(teams)
-      this.teams = teams
-    })
 
 
 

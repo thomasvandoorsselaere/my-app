@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Team } from '../../models/team';
 
 /**
  * Generated class for the GamePage page.
@@ -14,20 +15,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'game.html',
 })
 export class GamePage {
-teamName : any
+team : Team
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.teamName = navParams.get("teamName")
+    this.team = navParams.get("chosenTeam");
   }
 
 
   gameTeam(){
-    this.navCtrl.push("GameteamPage")
+    this.navCtrl.push("GameteamPage");
   }
 
   gamePlayers(){
     this.navCtrl.push("GameplayersPage", {
-      teamNamePlayers: this.teamName
+      chosenTeam: this.team
     })
   }
 
@@ -37,14 +38,14 @@ teamName : any
 
   startGame(){
     this.navCtrl.push("ActivegamePage",{
-      teamNameUsed: this.teamName
+      chosenTeam: this.team
     })
      
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     console.log('ionViewDidLoad GamePage');
-    console.log(this.teamName)
+    console.log(this.team)
   }
 
 

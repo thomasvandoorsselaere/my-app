@@ -14,15 +14,21 @@
 
 <ion-content padding>
  <ion-card *ngFor="let player of players">
-    <div *ngIf="player.status == true">
-    <ion-card-header (click)="toggleCard()">{{player.name}}</ion-card-header>
+    <div *ngIf="player.status">
+    <ion-card-header (click)="toggleCard()">{{player.name}}<i class="ion-arrow-down-b"></i></ion-card-header>
     <ion-card-content #cc>
        <div *ngFor="let option of options">
-           <div *ngIf="option.status == true">  
-         <p>{{option.name}}</p>
+           <div *ngIf="option.status">  
+              <ion-item>
+                  <ion-label color="primary">{{option.name}}</ion-label>
+                  <ion-input placeholder="Text Input"></ion-input>
+                  <i class="icon ion-plus"></i>
+                  <i class="icon ion-minus"></i>
+                </ion-item>
        </div>
      </div>
     </ion-card-content>
   </div>
  </ion-card>
+ <button ion-button round (click)="submitGame()">Finish Game</button>
 </ion-content>

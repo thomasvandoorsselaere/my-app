@@ -16,7 +16,7 @@
 <ion-content padding>
     
     <form>
-      <div *ngFor="let option of options">
+      <div *ngFor="let option of options | async">
         <label>{{option.name}}</label>
         <ion-toggle [checked]="option.status" (ionChange)="changeToggle(option)"></ion-toggle>
       </div>

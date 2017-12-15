@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ProvidersTeamsProvider } from '../../providers/providers-teams/providers-teams';
 import { Team } from '../../models/team';
 import { Player } from '../../models/player'
+import { AngularFirestoreDocument, AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the TeamplayersPage page.
@@ -17,7 +19,11 @@ import { Player } from '../../models/player'
   templateUrl: 'teamplayers.html',
 })
 export class TeamplayersPage {
-  players: Player[] 
+  playersCollection: AngularFirestoreCollection<Player>
+  players: Observable<Player[]>
+  playerDoc: AngularFirestoreDocument<Player>
+  filteredPlayers: Observable<Player[]>
+  
   player: Player ={
     name: ''
   }
@@ -26,8 +32,18 @@ export class TeamplayersPage {
 
   constructor(
     private teamProvider: ProvidersTeamsProvider, 
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
+    public afs: AngularFirestore, 
     public navParams: NavParams,) {
+      
+      this.playersCollection = this.afs.collection('players')
+      this.players = this.playersCollection.snapshotChanges().map(changes => {
+        return changes.map(a => {
+          const data = a.payload.doc.data() as Player
+          data.id = a.payload.doc.id
+          return data
+        })
+      })
 
       this.teamName = navParams.get("teamName")
 
@@ -46,12 +62,13 @@ export class TeamplayersPage {
     this.teamProvider.deletePlayer(player);
   }
 
+  filterplayers(team){
+    return this.players.map(x => x.filter(y => y.team === team))
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeamplayersPage');
-    this.teamProvider.getPlayers(this.teamName).subscribe(players => {
-      this.players = players
-    })
-    
+    this.filteredPlayers = this.filterplayers(this.teamName)
   }
 
 }

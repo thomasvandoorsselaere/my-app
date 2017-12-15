@@ -14,7 +14,7 @@
 
 
 <ion-content padding>
-  <ion-item *ngFor="let player of players">
+  <ion-item *ngFor="let player of filteredPlayers | async">
     <ion-label>{{ player.name }}</ion-label>  
     <ion-toggle [checked]="player.status" (ionChange)="selectedPlayers(player)"></ion-toggle>
   </ion-item>

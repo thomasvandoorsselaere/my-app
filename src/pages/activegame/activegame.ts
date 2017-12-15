@@ -32,7 +32,7 @@ export class ActivegamePage {
     public navCtrl: NavController, 
     public navParams: NavParams) {
 
-      this.team = navParams.get("teamNameUsed")
+      this.team = navParams.get("chosenTeam")
   }
 
   toggleCard(){
@@ -48,7 +48,7 @@ export class ActivegamePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivegamePage');
 
-  this.teamProvider.getPlayers(this.team).subscribe(players => {
+  this.teamProvider.getPlayers(this.team.name).subscribe(players => {
     this.players = players
   })
 

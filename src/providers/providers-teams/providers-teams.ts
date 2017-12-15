@@ -23,7 +23,7 @@ export class ProvidersTeamsProvider {
 
   constructor(public afs: AngularFirestore) {
     this.teamsCollection = this.afs.collection('team')
-
+   
     this.teams = this.teamsCollection.snapshotChanges().map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Team
@@ -47,7 +47,7 @@ export class ProvidersTeamsProvider {
     return this.teams
   }
 
-  getPlayers(team: Team){
+  getPlayers(team: string){
     return this.players.map(x => x.filter(y => y.team === team))
   }
 
