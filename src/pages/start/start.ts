@@ -55,7 +55,7 @@ export class StartPage {
     this.navCtrl.push("HistoryPage")
   }
 
-  credentials(){
+  options(){
     this.navCtrl.push("OptionsPage")
   }
 }
