@@ -12,11 +12,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { FIREBASE_CONFIG } from './app.firebase.config';
 import { ProvidersTeamsProvider } from '../providers/providers-teams/providers-teams';
 import { ProvidersGameProvider } from '../providers/providers-game/providers-game';
+import { TeamplayersPage } from '../pages/teamplayers/teamplayers';
 
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
+    TeamplayersPage
 
   ],
   imports: [
@@ -29,7 +31,8 @@ import { ProvidersGameProvider } from '../providers/providers-game/providers-gam
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp,
+    TeamplayersPage
   ],
   providers: [
     StatusBar,

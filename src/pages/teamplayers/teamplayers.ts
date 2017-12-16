@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 import { ProvidersTeamsProvider } from '../../providers/providers-teams/providers-teams';
 import { Team } from '../../models/team';
 import { Player } from '../../models/player'
@@ -33,7 +33,9 @@ export class TeamplayersPage {
   constructor(
     private teamProvider: ProvidersTeamsProvider, 
     public navCtrl: NavController,
-    public afs: AngularFirestore, 
+    public afs: AngularFirestore,
+    public viewCtrl: ViewController,
+    public alertCtrl: AlertController, 
     public navParams: NavParams,) {
       
       this.playersCollection = this.afs.collection('players')
@@ -48,6 +50,42 @@ export class TeamplayersPage {
       this.teamName = navParams.get("teamName")
 
       
+  }
+
+  addplayerbutton(){
+    let prompt = this.alertCtrl.create({
+      title: 'Add team',
+      message: "Enter a teamname",
+      inputs: [
+        {
+          name: 'player',
+          placeholder: 'teamname'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            console.log('Saved clicked');
+            console.log(this.player)
+            if(this.player.name != ''){
+              console.log(this.player.name)
+              console.log(data.name)
+               this.player.name = data.player
+              this.teamProvider.addPlayer(this.player, this.teamName)
+              this.player.name = ''
+            }
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   onSubmit(player, team){
@@ -66,11 +104,14 @@ export class TeamplayersPage {
     return this.players.map(x => x.filter(y => y.team === team))
   }
 
+  dismiss() {
+    this.viewCtrl.dismiss();
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeamplayersPage');
     this.filteredPlayers = this.filterplayers(this.teamName)
 
-    
   }
 
 }

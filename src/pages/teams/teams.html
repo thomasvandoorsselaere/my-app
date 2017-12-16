@@ -22,14 +22,7 @@
         
       </ion-list>
       <br>
-      <form (ngSubmit)="onSubmit()">
-      <ion-item>
-          <ion-label fixed>New Team</ion-label>
-          <ion-input type="text" [(ngModel)]="team.name" name="name"></ion-input>
-        </ion-item>
-        <br>
-        <button type="submit" ion-button color="light">Add Team</button>
-      </form>
+      <button ion-button round (click)="addteambutton()">add team popup</button>
 </ion-content>
 
 

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { ProvidersTeamsProvider } from '../../providers/providers-teams/providers-teams';
 import { Team } from '../../models/team';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { TeamplayersPage } from '../teamplayers/teamplayers';
 /**
  * Generated class for the TeamsPage page.
  *
@@ -31,6 +32,8 @@ export class TeamsPage {
     private afAuth: AngularFireAuth,
     public navCtrl: NavController,
     public afs: AngularFirestore,
+    public modelCtrl: ModalController,
+    public alertCtrl: AlertController,
     public navParams: NavParams) {
       this.teamsCollection = this.afs.collection('team')
       
@@ -45,24 +48,57 @@ export class TeamsPage {
        
   }
 
-  
-  
-  teamPlayers(team){
-    this.navCtrl.push("TeamplayersPage",{
-      
-      teamName: team.name
-    })
-  }
 
   
   
-  onSubmit(){
-    if(this.team.name != ''){
-      this.team.userid = this.afAuth.auth.currentUser.uid
-      this.teamProvider.addTeam(this.team)
-      this.team.name = ''
-    }
+  teamPlayers(team){
+    let modal = this.modelCtrl.create(TeamplayersPage,{teamName: team.name})
+    modal.present()
   }
+
+  addteambutton(){
+    let prompt = this.alertCtrl.create({
+      title: 'Add team',
+      message: "Enter a teamname",
+      inputs: [
+        {
+          name: 'team',
+          placeholder: 'teamname'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            console.log('Saved clicked');
+            console.log(this.team)
+            if(this.team.name != ''){
+              this.team.userid = this.afAuth.auth.currentUser.uid
+              this.team.name = data.team
+              this.teamProvider.addTeam(this.team)
+              this.team.name = ''
+            }
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+  
+  
+  // onSubmit(){
+  //   if(this.team.name != ''){
+  //     this.team.userid = this.afAuth.auth.currentUser.uid
+  //     this.teamProvider.addTeam(this.team)
+  //     this.team.name = ''
+  //   }
+  // }
 
   filterteams(UserId){
    return this.teams.map(x => x.filter(y => y.userid === UserId))
