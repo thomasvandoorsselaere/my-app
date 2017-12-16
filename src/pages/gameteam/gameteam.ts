@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
-import { ProvidersTeamsProvider } from '../../providers/providers-teams/providers-teams';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
 import { Team } from '../../models/team';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
@@ -25,7 +25,6 @@ export class GameteamPage {
   UserId: string
 
   constructor(
-    private teamProvider: ProvidersTeamsProvider,
     public navCtrl: NavController,
     private afAuth: AngularFireAuth,
     public afs: AngularFirestore,

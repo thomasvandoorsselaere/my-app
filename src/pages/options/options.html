@@ -15,11 +15,15 @@
 
 <ion-content padding>
     
-    <form>
-      <div *ngFor="let option of options | async">
-        <label>{{option.name}}</label>
-        <ion-toggle [checked]="option.status" (ionChange)="changeToggle(option)"></ion-toggle>
-      </div>
-  </form>
+  <ion-list no-border>
+      
+          <ion-list-header>
+            Options
+          </ion-list-header>
+          <ion-item *ngFor="let option of options | async">
+              <ion-toggle [checked]="option.status" (ionChange)="changeToggle(option)"></ion-toggle>
+              <ion-label> {{option.name}}</ion-label>
+          </ion-item>
+  </ion-list>
 
 </ion-content>

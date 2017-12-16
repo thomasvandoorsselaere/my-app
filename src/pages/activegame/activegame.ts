@@ -1,19 +1,13 @@
 import { Component, ViewChild, Renderer } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ProvidersTeamsProvider } from '../../providers/providers-teams/providers-teams';
+
 import { Player } from '../../models/player';
-import { ProvidersGameProvider } from '../../providers/providers-game/providers-game';
+
 import { Gameoptions } from '../../models/gameoptions';
 import { Team } from '../../models/team';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 
-/**
- * Generated class for the ActivegamePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -34,8 +28,6 @@ export class ActivegamePage {
 
   constructor(
     public renderer: Renderer,
-    private gameProvider: ProvidersGameProvider,
-    private teamProvider: ProvidersTeamsProvider,
     public navCtrl: NavController, 
     public afs: AngularFirestore,
     public navParams: NavParams) {
