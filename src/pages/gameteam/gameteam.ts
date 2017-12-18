@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
 import { Team } from '../../models/team';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
@@ -27,6 +27,7 @@ export class GameteamPage {
   constructor(
     public navCtrl: NavController,
     private afAuth: AngularFireAuth,
+    public modelCtrl: ModalController,
     public afs: AngularFirestore,
      public navParams: NavParams) {
       this.teamsCollection = this.afs.collection('team')
@@ -43,12 +44,11 @@ export class GameteamPage {
  
   }
 
-  teamGame(team){
-    this.navCtrl.push("GamePage",{
-      
+  teamPlayers(team){
+    let modal = this.modelCtrl.create("GameplayersPage",{
       chosenTeam: team.name
     })
-
+    modal.present()
   }
 
   filterteams(UserId){

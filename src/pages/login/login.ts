@@ -30,7 +30,7 @@ export class LoginPage {
     try{
       const result = this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password)
       if(result){
-        this.navCtrl.setRoot('StartPage')
+        this.navCtrl.setRoot('HometabPage')
       }
       
     }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { Player } from '../../models/player';
@@ -27,6 +27,7 @@ export class GameplayersPage {
   constructor(
     private teamProvider: ProvidersTeamsProvider,
     public navCtrl: NavController,
+    public modelCtrl: ModalController,
     public afs: AngularFirestore,
     public navParams: NavParams) {
       
@@ -56,6 +57,12 @@ export class GameplayersPage {
     return this.players.map(x => x.filter(y => y.team === team))
   }
   
+  startGame(){
+    let modal = this.modelCtrl.create("ActivegamePage",{
+      chosenTeam: this.chosenTeam
+    })
+    modal.present()
+  }
 
   ionViewDidEnter () {
     console.log('ionViewDidLoad GameplayersPage');

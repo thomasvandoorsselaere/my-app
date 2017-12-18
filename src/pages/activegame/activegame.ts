@@ -7,6 +7,7 @@ import { Gameoptions } from '../../models/gameoptions';
 import { Team } from '../../models/team';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import { HometabPage } from '../hometab/hometab';
 
 
 @IonicPage()
@@ -71,10 +72,15 @@ export class ActivegamePage {
     return this.players.map(x => x.filter(y => y.team === team))
   }
 
-
+  submitGame(){
+    this.navCtrl.setRoot(HometabPage)
+    this.navCtrl.popToRoot()
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivegamePage');
+    console.log(this.options)
+    console.log(this.team)
     this.filteredPlayers = this.filterplayers(this.team)
     
 }

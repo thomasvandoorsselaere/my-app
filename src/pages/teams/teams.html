@@ -7,22 +7,20 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>teams</ion-title>
+    <ion-title>Teams</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <ion-list>
-      <ion-item *ngFor="let team of filteredTeams | async">
-        <button  (click)="teamPlayers(team)"> {{team.name}}</button>
-        <ion-icon name="trash" (click)="teamDelete(team)"></ion-icon>
-      </ion-item>
-        
-      </ion-list>
-      <br>
-      <button ion-button round (click)="addteambutton()">add team</button>
+  <ion-list>
+    <ion-item *ngFor="let team of filteredTeams | async">
+      <button  (click)="teamPlayers(team)"> {{team.name}}</button>
+      <ion-icon name="trash" (click)="teamDelete(team)"></ion-icon>
+    </ion-item>
+      
+    </ion-list>
+    <br>
+    <button ion-button full (click)="addteambutton()">add team</button>
 </ion-content>
-
-
