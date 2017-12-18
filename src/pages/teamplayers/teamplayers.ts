@@ -25,9 +25,8 @@ export class TeamplayersPage {
   filteredPlayers: Observable<Player[]>
   
   player: Player ={
-    name: ''
   }
-  teamName: any
+  team: Team
   
 
   constructor(
@@ -47,19 +46,19 @@ export class TeamplayersPage {
         })
       })
 
-      this.teamName = navParams.get("teamName")
+      this.team = navParams.get("teamName")
 
       
   }
 
   addplayerbutton(){
     let prompt = this.alertCtrl.create({
-      title: 'Add team',
-      message: "Enter a teamname",
+      title: 'Add player',
+      message: "Enter a playersname",
       inputs: [
         {
           name: 'player',
-          placeholder: 'teamname'
+          placeholder: 'playername'
         },
       ],
       buttons: [
@@ -74,12 +73,12 @@ export class TeamplayersPage {
           handler: data => {
             console.log('Saved clicked');
             console.log(this.player)
+            console.log(data.name)
             if(this.player.name != ''){
-              console.log(this.player.name)
-              console.log(data.name)
-               this.player.name = data.player
-              this.teamProvider.addPlayer(this.player, this.teamName)
+              this.player.name = data.player
+              this.teamProvider.addPlayer(this.player, this.team)
               this.player.name = ''
+              this.player.team = ''
             }
           }
         }
@@ -88,13 +87,13 @@ export class TeamplayersPage {
     prompt.present();
   }
 
-  onSubmit(player, team){
-    if(this.player.name != ''){
-      this.teamProvider.addPlayer(this.player, this.teamName)
-      this.player.name = ''
+  // onSubmit(player, team){
+  //   if(this.player.name != ''){
+  //     this.teamProvider.addPlayer(this.player, this.team)
+  //     this.player.name = ''
       
-    }
-  }
+  //   }
+  // }
 
   playerDelete(player){
     this.teamProvider.deletePlayer(player);
@@ -110,7 +109,7 @@ export class TeamplayersPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeamplayersPage');
-    this.filteredPlayers = this.filterplayers(this.teamName)
+    this.filteredPlayers = this.filterplayers(this.team)
 
   }
 

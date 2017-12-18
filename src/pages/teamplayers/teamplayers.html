@@ -6,10 +6,11 @@
 -->
 <ion-header>
     <ion-toolbar>
-        <ion-title>
-          Players
-        </ion-title>
-          <ion-buttons (click)="dismiss()">cancel</ion-buttons>
+        <ion-buttons start><button (click)="dismiss()"><ion-icon name='arrow-back'></ion-icon></button>          
+        </ion-buttons>
+              <ion-title>
+                  Players
+                </ion-title>
       </ion-toolbar>
 </ion-header>
 
@@ -21,15 +22,5 @@
          </ion-item> 
     </ion-list>
 
-      <form (ngSubmit)="onSubmit()">
-          <ion-item>
-              <ion-label fixed>New Player</ion-label>
-              <ion-input type="text" [(ngModel)]="player.name" name="name"></ion-input>
-              
-            </ion-item>
-            <br>
-            <button type="submit" ion-button color="light">Add Player</button>
-          </form>
-
-          <button (click)="addplayerbutton()">add player</button>
+          <button ion-button full (click)="addplayerbutton()">add player</button>
 </ion-content>
