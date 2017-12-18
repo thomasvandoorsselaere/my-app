@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth'
+import { TeamsPage } from '../teams/teams';
+import { OptionsPage } from '../options/options';
 
 
 /**
@@ -14,8 +16,12 @@ import { AngularFireAuth } from 'angularfire2/auth'
 @Component({
   selector: 'page-start',
   templateUrl: 'start.html',
+
 })
 export class StartPage {
+  tab1Root = StartPage;
+  tab2Root = TeamsPage;
+  tab3Root = OptionsPage;
 
   constructor(
     private afAuth: AngularFireAuth,

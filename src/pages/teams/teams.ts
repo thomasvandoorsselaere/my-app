@@ -90,15 +90,6 @@ export class TeamsPage {
     });
     prompt.present();
   }
-  
-  
-  // onSubmit(){
-  //   if(this.team.name != ''){
-  //     this.team.userid = this.afAuth.auth.currentUser.uid
-  //     this.teamProvider.addTeam(this.team)
-  //     this.team.name = ''
-  //   }
-  // }
 
   filterteams(UserId){
    return this.teams.map(x => x.filter(y => y.userid === UserId))

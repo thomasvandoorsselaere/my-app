@@ -70,9 +70,12 @@ export class ActivegamePage {
   filterplayers(team){
     return this.players.map(x => x.filter(y => y.team === team))
   }
+
+
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivegamePage');
     this.filteredPlayers = this.filterplayers(this.team)
     
 }
-}
+} 

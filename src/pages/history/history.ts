@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { ProvidersGameProvider } from '../../providers/providers-game/providers-game';
 import { Game } from '../../models/game';
 
@@ -15,12 +15,19 @@ import { Game } from '../../models/game';
   selector: 'page-history',
   templateUrl: 'history.html',
 })
+
 export class HistoryPage {
   games: Game[]
   constructor(
     private gameProvide: ProvidersGameProvider,
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
+    public modelCtrl:  ModalController,
     public navParams: NavParams) {
+  }
+
+  startnewgame(){
+    let modal = this.modelCtrl.create(" ")
+    modal.present()
   }
 
   ionViewDidLoad() {
