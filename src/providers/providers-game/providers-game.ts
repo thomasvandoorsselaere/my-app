@@ -18,6 +18,8 @@ export class ProvidersGameProvider {
   gameHistory: Observable<Game[]>
   gameCollection: AngularFirestoreCollection<Game>
   gameHistoryCollection: AngularFirestoreCollection<Game>
+  gameDoc: AngularFirestoreDocument<Game>
+  games: Observable<Game[]>
 
   // array doorsturen is niet correct je hebt de [0] waarde nodig van die array
 
@@ -35,15 +37,16 @@ export class ProvidersGameProvider {
           })
         })
 
-      this.gameHistoryCollection = this.afs.collection('game')
-
-       this.gameHistory = this.gameHistoryCollection.snapshotChanges().map(changes => {
-         return changes.map(a => {
-           const data = a.payload.doc.data() as Game
-           data.id = a.payload.doc.id
-           return data
-         })
-       })
+        this.gameCollection = this.afs.collection('game')
+        this.games = this.afs.collection('game').valueChanges()
+  
+        this.games = this .gameCollection.snapshotChanges().map(changes => {
+          return changes.map(a => {
+            const data = a.payload.doc.data() as Game
+            data.id = a.payload.doc.id
+            return data
+          })
+        })
   }
 
   getOptions(){
@@ -61,6 +64,11 @@ export class ProvidersGameProvider {
 
   addGame(game: Game){
     this.gameCollection.add(game)
+  }
+
+  deleteGame(game:Game){
+    this.gameDoc = this.afs.doc(`team/${game.id}`)
+    this.gameDoc.delete()
   }
   
 

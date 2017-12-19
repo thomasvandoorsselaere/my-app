@@ -14,12 +14,16 @@ import { ProvidersTeamsProvider } from '../providers/providers-teams/providers-t
 import { ProvidersGameProvider } from '../providers/providers-game/providers-game';
 import { TeamplayersPage } from '../pages/teamplayers/teamplayers';
 import { LoginPage } from '../pages/login/login';
+import { GameteamPage } from '../pages/gameteam/gameteam';
+import { GamedetailPage } from '../pages/gamedetail/gamedetail';
 
 
 @NgModule({
   declarations: [
     MyApp,
     TeamplayersPage,
+    GameteamPage,
+    GamedetailPage
 
   ],
   imports: [
@@ -34,6 +38,8 @@ import { LoginPage } from '../pages/login/login';
   entryComponents: [
     MyApp,
     TeamplayersPage,
+    GameteamPage,
+    GamedetailPage
   ],
   providers: [
     StatusBar,

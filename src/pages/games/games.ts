@@ -8,6 +8,8 @@ import { GameteamPage } from '../gameteam/gameteam';
 import { GamePage } from '../game/game';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../login/login';
+import { TeamplayersPage } from '../teamplayers/teamplayers';
+import { ProvidersGameProvider } from '../../providers/providers-game/providers-game';
 
 /**
  * Generated class for the GamesPage page.
@@ -28,6 +30,7 @@ games: Observable<Game[]>
 
   constructor(
     public navCtrl: NavController,
+    private gameProvider: ProvidersGameProvider,
     public modelCtrl: ModalController,
     public afs: AngularFirestore,
     private afAuth: AngularFireAuth,
@@ -53,13 +56,17 @@ games: Observable<Game[]>
   }
 
   gamedetail(game: Game){
-    let modal = this.modelCtrl.create(GamePage)
-    modal.present
+    let modalGameDetail = this.modelCtrl.create(TeamplayersPage)
+    modalGameDetail.present
   }
 
   newGame(){
     let modal = this.modelCtrl.create(GameteamPage)
     modal.present()
+  }
+
+  gameDelete(game: Game){
+    this.gameProvider.deleteGame(game);
   }
 
   logout(){
