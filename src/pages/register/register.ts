@@ -29,16 +29,6 @@ export class RegisterPage {
         duration: 3000
       }).present()
     })
-    // try{
-    //   const result = await this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
-    //   console.log(result)
-    //   if(result){
-    //     this.navCtrl.push('LoginPage')
-    //   }
-    // }
-    // catch(e){
-    //   console.error(e);
-    // }
   }
 
 }
