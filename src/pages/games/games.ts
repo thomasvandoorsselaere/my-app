@@ -7,7 +7,6 @@ import { GamedetailPage } from '../gamedetail/gamedetail';
 import { GameteamPage } from '../gameteam/gameteam';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../login/login';
-import { TeamplayersPage } from '../teamplayers/teamplayers';
 import { ProvidersGameProvider } from '../../providers/providers-game/providers-game';
 
 /**
@@ -55,7 +54,7 @@ games: Observable<Game[]>
   }
 
   gamedetail(game: Game){
-    let modalGameDetail = this.modelCtrl.create(TeamplayersPage)
+    let modalGameDetail = this.modelCtrl.create(GamedetailPage)
     modalGameDetail.present
   }
 

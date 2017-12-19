@@ -13,7 +13,6 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
 import { ProvidersTeamsProvider } from '../providers/providers-teams/providers-teams';
 import { ProvidersGameProvider } from '../providers/providers-game/providers-game';
 import { TeamplayersPage } from '../pages/teamplayers/teamplayers';
-import { LoginPage } from '../pages/login/login';
 import { GameteamPage } from '../pages/gameteam/gameteam';
 import { GamedetailPage } from '../pages/gamedetail/gamedetail';
 
@@ -32,6 +31,7 @@ import { GamedetailPage } from '../pages/gamedetail/gamedetail';
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     IonicPageModule
   ],
   bootstrap: [IonicApp],
