@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth'
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the LoginPage page.
@@ -27,20 +28,33 @@ export class LoginPage {
   }
 
   async login(user: User){
-    try{
-      const result = this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password)
-      if(result){
-        this.navCtrl.setRoot('HometabPage')
-      }
+      this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password).then(
+        value => {
+          this.navCtrl.setRoot('HometabPage')
+        }
+      ).catch(e => {
+        this.toast.create({
+          message: e.message,
+          duration: 3000
+        }).present()
+      })
+
+    // try{
+    //   const result = this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password)
+    //   if(result){
+    //     this.navCtrl.setRoot('HometabPage')
+    //   }
+    //   else{
+    //     this.navCtrl.setRoot('LoginPage')
+    //   }
+    // }
+    // catch (e){
+    //   this.toast.create({
+    //     message: e.message,
+    //     duration: 3000
+    //   }).present()
       
-    }
-    catch (e){
-      this.toast.create({
-        message: e.message,
-        duration: 3000
-      }).present()
-      
-    }
+    // }
     
   }
 
