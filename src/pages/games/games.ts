@@ -5,7 +5,6 @@ import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/fires
 import { Observable } from 'rxjs/Observable';
 import { GamedetailPage } from '../gamedetail/gamedetail';
 import { GameteamPage } from '../gameteam/gameteam';
-import { GamePage } from '../game/game';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../login/login';
 import { TeamplayersPage } from '../teamplayers/teamplayers';
