@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, AlertController, App } from 'ionic-angular';
 import { ProvidersTeamsProvider } from '../../providers/providers-teams/providers-teams';
 import { Team } from '../../models/team';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { TeamplayersPage } from '../teamplayers/teamplayers';
+import { LoginPage } from '../login/login';
 /**
  * Generated class for the TeamsPage page.
  *
@@ -29,6 +30,7 @@ export class TeamsPage {
 
   constructor(
     private teamProvider: ProvidersTeamsProvider, 
+    public app: App,
     private afAuth: AngularFireAuth,
     public navCtrl: NavController,
     public afs: AngularFirestore,
@@ -100,7 +102,12 @@ export class TeamsPage {
     this.teamProvider.deleteTeam(team);
   }
 
-  
+  logout(){
+    this.afAuth.auth.signOut().then(()=> {
+      this.app.getRootNav().setRoot(LoginPage);
+    })
+  }
+
   
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeamsPage');

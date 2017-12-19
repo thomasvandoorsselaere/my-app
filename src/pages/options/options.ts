@@ -4,6 +4,9 @@ import { ProvidersGameProvider } from '../../providers/providers-game/providers-
 import { Gameoptions } from '../../models/gameoptions';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import { LoginPage } from '../login/login';
+import { App } from 'ionic-angular/components/app/app';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 /**
  * Generated class for the OptionsPage page.
@@ -26,6 +29,8 @@ options: Observable<Gameoptions[]>
     private gameProvider: ProvidersGameProvider,
     public navCtrl: NavController,
     public afs: AngularFirestore,
+    private afAuth: AngularFireAuth,
+    public app: App,
     public navParams: NavParams) {
 
       this.options = this.afs.collection('gameoptions').valueChanges()
@@ -47,7 +52,13 @@ options: Observable<Gameoptions[]>
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OptionsPage');
+    console.log(this.options)
+  }
 
+  logout(){
+    this.afAuth.auth.signOut().then(()=> {
+      this.app.getRootNav().setRoot(LoginPage);
+    })
   }
 
 }

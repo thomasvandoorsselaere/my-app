@@ -6,9 +6,10 @@
 </ion-header>
 
 <ion-content padding>
- <ion-card *ngFor="let player of filteredPlayers | async">
+ <form (ngSubmit)="submitGame()">
+    <ion-card *ngFor="let player of filteredPlayers | async; let i=index">
     <div *ngIf="player.status">
-    <ion-card-header (click)="toggleCard()">{{player.name}}
+    <ion-card-header (click)="toggleCard(i)">{{player.name}}
         <ion-icon end name="arrow-dropdown" style="float:right"></ion-icon>
     </ion-card-header>
     <ion-card-content #cc>
@@ -24,5 +25,9 @@
     </ion-card-content>
   </div>
  </ion-card>
- <button ion-button full (click)="submitGame()">Finish Game</button>
+ <button ion-button full type="submit">Finish Game</button>
+ </form>
 </ion-content>
+
+
+ 

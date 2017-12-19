@@ -1,5 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, App } from 'ionic-angular';
+import { Game } from '../../models/game';
+import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
+import { GamedetailPage } from '../gamedetail/gamedetail';
+import { GameteamPage } from '../gameteam/gameteam';
+import { GamePage } from '../game/game';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the GamesPage page.
@@ -15,19 +23,49 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 })
 export class GamesPage {
 
+gameCollection: AngularFirestoreCollection<Game>
+games: Observable<Game[]>
+
   constructor(
     public navCtrl: NavController,
     public modelCtrl: ModalController,
+    public afs: AngularFirestore,
+    private afAuth: AngularFireAuth,
+    public app: App,
     public navParams: NavParams) {
+
+      this.gameCollection = this.afs.collection('game')
+      this.games = this.afs.collection('game').valueChanges()
+
+      this.games = this .gameCollection.snapshotChanges().map(changes => {
+        return changes.map(a => {
+          const data = a.payload.doc.data() as Game
+          data.id = a.payload.doc.id
+          return data
+        })
+      })
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamesPage');
+
+    console.log(this.games)
+  }
+
+  gamedetail(game: Game){
+    let modal = this.modelCtrl.create(GamePage)
+    modal.present
   }
 
   newGame(){
-    let modal = this.modelCtrl.create("GameteamPage")
+    let modal = this.modelCtrl.create(GameteamPage)
     modal.present()
+  }
+
+  logout(){
+    this.afAuth.auth.signOut().then(()=> {
+      this.app.getRootNav().setRoot(LoginPage);
+    })
   }
 
 

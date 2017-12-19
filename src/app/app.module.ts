@@ -13,12 +13,13 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
 import { ProvidersTeamsProvider } from '../providers/providers-teams/providers-teams';
 import { ProvidersGameProvider } from '../providers/providers-game/providers-game';
 import { TeamplayersPage } from '../pages/teamplayers/teamplayers';
+import { LoginPage } from '../pages/login/login';
 
 
 @NgModule({
   declarations: [
     MyApp,
-    TeamplayersPage
+    TeamplayersPage,
 
   ],
   imports: [
@@ -32,7 +33,7 @@ import { TeamplayersPage } from '../pages/teamplayers/teamplayers';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    TeamplayersPage
+    TeamplayersPage,
   ],
   providers: [
     StatusBar,

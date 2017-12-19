@@ -8,6 +8,8 @@ import { Team } from '../../models/team';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { HometabPage } from '../hometab/hometab';
+import { Game } from '../../models/game';
+import { ProvidersGameProvider } from '../../providers/providers-game/providers-game';
 
 
 @IonicPage()
@@ -25,11 +27,14 @@ export class ActivegamePage {
 
   team: Team
   cardExpanded: boolean= false
+  game: Game
+
   @ViewChild("cc") cardContent:any
 
   constructor(
     public renderer: Renderer,
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
+    public gameProvider: ProvidersGameProvider, 
     public afs: AngularFirestore,
     public navParams: NavParams) {
 
@@ -56,9 +61,9 @@ export class ActivegamePage {
 
 
       this.team = navParams.get("chosenTeam")
-  }
 
-  toggleCard(){
+  }
+  toggleCard(i){
     if(this.cardExpanded){
         this.renderer.setElementStyle(this.cardContent.nativeElement, "max-height", "0px")
     } else{
@@ -72,7 +77,9 @@ export class ActivegamePage {
     return this.players.map(x => x.filter(y => y.team === team))
   }
 
-  submitGame(){
+  submitGame(game: Game){
+    this.gameProvider.addGame(game)
+
     this.navCtrl.setRoot(HometabPage)
     this.navCtrl.popToRoot()
   }
