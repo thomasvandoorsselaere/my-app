@@ -38,23 +38,6 @@ export class LoginPage {
           duration: 3000
         }).present()
       })
-
-    // try{
-    //   const result = this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password)
-    //   if(result){
-    //     this.navCtrl.setRoot('HometabPage')
-    //   }
-    //   else{
-    //     this.navCtrl.setRoot('LoginPage')
-    //   }
-    // }
-    // catch (e){
-    //   this.toast.create({
-    //     message: e.message,
-    //     duration: 3000
-    //   }).present()
-      
-    // }
     
   }
 
