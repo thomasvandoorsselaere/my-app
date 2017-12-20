@@ -18,6 +18,7 @@ import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument 
 })
 export class GamedetailsPage {
 
+  valueselected = false
   gameCollection: AngularFirestoreCollection<Game>
   gameDetails: Observable<Game[]>
   game: Observable<Game[]>

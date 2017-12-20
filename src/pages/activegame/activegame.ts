@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { HometabPage } from '../hometab/hometab';
 import { Game } from '../../models/game';
 import { ProvidersGameProvider } from '../../providers/providers-game/providers-game';
+import { GamePlayer } from '../../models/gameplayer';
 
 
 @IonicPage()
@@ -20,14 +21,18 @@ import { ProvidersGameProvider } from '../../providers/providers-game/providers-
 export class ActivegamePage {
   optionCollection : AngularFirestoreCollection<Gameoptions>
   options: Observable<Gameoptions[]>
-
   playersCollection: AngularFirestoreCollection<Player>
   players: Observable<Player[]>
   filteredPlayers: Observable<Player[]>
 
+  gamePlayersCollection: AngularFirestoreCollection<any[]>
+
   team: Team
   cardExpanded: boolean= false
-  game: Game = {
+  gameplayers: GamePlayer ={
+
+  }
+  game: any = {
 
   }
 
@@ -43,7 +48,7 @@ export class ActivegamePage {
       this.options = this.afs.collection('gameoptions').valueChanges()
       this.optionCollection = this.afs.collection('gameoptions')
       
-          this.options = this.optionCollection.snapshotChanges().map(changes => {
+        this.options = this.optionCollection.snapshotChanges().map(changes => {
           return changes.map(a => {
             const data = a.payload.doc.data() as Gameoptions
             data.id = a.payload.doc.id
@@ -51,7 +56,8 @@ export class ActivegamePage {
           })
         })
     
-        this.playersCollection = this.afs.collection('players')
+      this.playersCollection = this.afs.collection('players')
+
         this.players = this.playersCollection.snapshotChanges().map(changes => {
           return changes.map(a => {
             const data = a.payload.doc.data() as Player
@@ -59,7 +65,8 @@ export class ActivegamePage {
             return data
           })
         })
-  
+
+      this.gamePlayersCollection = this.afs.collection('game/${this.game.id}/players') 
 
 
       this.team = navParams.get("chosenTeam")
@@ -79,12 +86,23 @@ export class ActivegamePage {
     return this.players.map(x => x.filter(y => y.team === team))
   }
 
-  submitGame(game: Game){
-    this.gameProvider.addGame(game)
+  submitGame(game: Game, gameplayers: GamePlayer){
+    
+    this.game.date = new Date()
+    this.game.name = 'Testthomas'
+    this.gameProvider.addGame(this.game)
 
     this.navCtrl.setRoot(HometabPage)
     this.navCtrl.popToRoot()
   }
+
+    // onSubmit(player, team){
+  //   if(this.player.name != ''){
+  //     this.teamProvider.addPlayer(this.player, this.team)
+  //     this.player.name = ''
+      
+  //   }
+  // }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivegamePage');
