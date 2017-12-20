@@ -13,7 +13,7 @@ import { ProvidersTeamsProvider } from '../providers/providers-teams/providers-t
 import { ProvidersGameProvider } from '../providers/providers-game/providers-game';
 import { TeamplayersPage } from '../pages/teamplayers/teamplayers';
 import { GameteamPage } from '../pages/gameteam/gameteam';
-import { GamedetailPage } from '../pages/gamedetail/gamedetail';
+import { GamedetailsPage } from '../pages/gamedetails/gamedetails';
 
 
 
@@ -22,7 +22,7 @@ import { GamedetailPage } from '../pages/gamedetail/gamedetail';
     MyApp,
     TeamplayersPage,
     GameteamPage,
-    GamedetailPage
+    GamedetailsPage
 
   ],
   imports: [
@@ -40,7 +40,7 @@ import { GamedetailPage } from '../pages/gamedetail/gamedetail';
     MyApp,
     TeamplayersPage,
     GameteamPage,
-    GamedetailPage
+    GamedetailsPage
   ],
   providers: [
     StatusBar,

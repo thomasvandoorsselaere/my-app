@@ -3,11 +3,12 @@ import { IonicPage, NavController, NavParams, ModalController, App } from 'ionic
 import { Game } from '../../models/game';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
-import { GamedetailPage } from '../gamedetail/gamedetail';
+import { GamedetailsPage } from '../gamedetails/gamedetails';
 import { GameteamPage } from '../gameteam/gameteam';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../login/login';
 import { ProvidersGameProvider } from '../../providers/providers-game/providers-game';
+import { Team } from '../../models/team';
 
 /**
  * Generated class for the GamesPage page.
@@ -53,9 +54,9 @@ games: Observable<Game[]>
     console.log(this.games)
   }
 
-  gamedetail(game: Game){
-    let modalGameDetail = this.modelCtrl.create(GamedetailPage)
-    modalGameDetail.present
+  gamedetail(team : Team){
+    let modalGameDetail = this.modelCtrl.create(GamedetailsPage)
+    modalGameDetail.present()
   }
 
   newGame(){
