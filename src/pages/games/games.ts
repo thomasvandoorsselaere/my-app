@@ -26,6 +26,9 @@ export class GamesPage {
 
 gameCollection: AngularFirestoreCollection<Game>
 games: Observable<Game[]>
+game: Game = {
+
+}
 
   constructor(
     public navCtrl: NavController,
@@ -55,7 +58,7 @@ games: Observable<Game[]>
   }
 
   gamedetail(team : Team){
-    let modalGameDetail = this.modelCtrl.create(GamedetailsPage)
+    let modalGameDetail = this.modelCtrl.create(GamedetailsPage,{gameName: team.id})
     modalGameDetail.present()
   }
 

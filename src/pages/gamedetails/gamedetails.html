@@ -16,5 +16,17 @@
 
 
 <ion-content padding>
+  <div *ngFor="let game of game | async; let i=index">
+  <ion-item>{{game.name}}</ion-item>
+  <ion-item>{{game.date}}</ion-item>
+  </div>
 
+  <div *ngFor="let player of gamePlayers | async">
+    
+    <ion-item>{{player.name}}</ion-item>
+    <ion-item>{{player.stats.points}}</ion-item>
+    <ion-item>{{player.stats.assists}}</ion-item>
+    <ion-item>{{player.stats.rebounds}}</ion-item>
+  </div>
+  
 </ion-content>

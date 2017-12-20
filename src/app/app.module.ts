@@ -14,6 +14,7 @@ import { ProvidersGameProvider } from '../providers/providers-game/providers-gam
 import { TeamplayersPage } from '../pages/teamplayers/teamplayers';
 import { GameteamPage } from '../pages/gameteam/gameteam';
 import { GamedetailsPage } from '../pages/gamedetails/gamedetails';
+import { LoginPage } from '../pages/login/login';
 
 
 
@@ -22,7 +23,8 @@ import { GamedetailsPage } from '../pages/gamedetails/gamedetails';
     MyApp,
     TeamplayersPage,
     GameteamPage,
-    GamedetailsPage
+    GamedetailsPage,
+
 
   ],
   imports: [
@@ -40,7 +42,8 @@ import { GamedetailsPage } from '../pages/gamedetails/gamedetails';
     MyApp,
     TeamplayersPage,
     GameteamPage,
-    GamedetailsPage
+    GamedetailsPage,
+
   ],
   providers: [
     StatusBar,
