@@ -27,7 +27,9 @@ export class ActivegamePage {
 
   team: Team
   cardExpanded: boolean= false
-  game: Game
+  game: Game = {
+
+  }
 
   @ViewChild("cc") cardContent:any
 

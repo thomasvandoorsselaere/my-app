@@ -3,10 +3,9 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule, IonicPageModule } from 'ionic-angular';
 import { AngularFireModule } from 'angularfire2'
 import { AngularFireAuthModule } from "angularfire2/auth"
-import { AngularFirestoreModule} from "angularfire2/firestore"
-
+import { AngularFirestoreModule } from "angularfire2/firestore"
+import { FormsModule } from "@angular/forms"
 import { MyApp } from './app.component';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FIREBASE_CONFIG } from './app.firebase.config';
@@ -15,6 +14,7 @@ import { ProvidersGameProvider } from '../providers/providers-game/providers-gam
 import { TeamplayersPage } from '../pages/teamplayers/teamplayers';
 import { GameteamPage } from '../pages/gameteam/gameteam';
 import { GamedetailPage } from '../pages/gamedetail/gamedetail';
+
 
 
 @NgModule({
@@ -32,7 +32,8 @@ import { GamedetailPage } from '../pages/gamedetail/gamedetail';
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFirestoreModule.enablePersistence(),
-    IonicPageModule
+    IonicPageModule,
+    FormsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

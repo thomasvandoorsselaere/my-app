@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { TeamplayersPage } from '../teamplayers/teamplayers';
 import { LoginPage } from '../login/login';
+import { GamedetailPage } from '../gamedetail/gamedetail';
 /**
  * Generated class for the TeamsPage page.
  *
