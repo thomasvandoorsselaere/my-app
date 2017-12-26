@@ -5,13 +5,15 @@ import { Player } from '../../models/player';
 
 import { Gameoptions } from '../../models/gameoptions';
 import { Team } from '../../models/team';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { HometabPage } from '../hometab/hometab';
 import { Game } from '../../models/game';
 import { ProvidersGameProvider } from '../../providers/providers-game/providers-game';
 import { GamePlayer } from '../../models/gameplayer';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import * as _ from 'lodash';
+import { NgForm } from '@angular/forms/src/directives/ng_form';
 
 @IonicPage()
 @Component({
@@ -23,20 +25,20 @@ export class ActivegamePage {
   options: Observable<Gameoptions[]>
   playersCollection: AngularFirestoreCollection<Player>
   players: Observable<Player[]>
+  currentPlayers: Player[];
   filteredPlayers: Observable<Player[]>
-
-  gamePlayersCollection: AngularFirestoreCollection<any[]>
-
   team: Team
   cardExpanded: boolean= false
-  gameplayers: GamePlayer ={
-
-  }
+  gameplayers:GamePlayer[] = [];
   game: any = {
 
   }
+  playerDoc: AngularFirestoreDocument<Player>
+  player: Observable<Player>
 
-  @ViewChild("cc") cardContent:any
+
+  model = new GamePlayer(null,'','','','','','','')
+  
 
   constructor(
     public renderer: Renderer,
@@ -45,7 +47,6 @@ export class ActivegamePage {
     public afs: AngularFirestore,
     public navParams: NavParams) {
 
-      this.options = this.afs.collection('gameoptions').valueChanges()
       this.optionCollection = this.afs.collection('gameoptions')
       
         this.options = this.optionCollection.snapshotChanges().map(changes => {
@@ -66,49 +67,44 @@ export class ActivegamePage {
           })
         })
 
-      this.gamePlayersCollection = this.afs.collection('game/${this.game.id}/players') 
-
+        // _.forEach(this.players, (player) => { this.gameplayers.push({name:player.name})})
+        // _.forEach(this.players, (player) => {
+        //   console.log(player.name)
+        //   this.gameplayers.push({name: player.name})
+          
+        // } )
+  
+        // this.options.subscribe((options) =>{
+        //   _.forEach(this.players, (player) => {player.options = options})
+        // });
 
       this.team = navParams.get("chosenTeam")
 
-  }
-  toggleCard(i){
-    if(this.cardExpanded){
-        this.renderer.setElementStyle(this.cardContent.nativeElement, "max-height", "0px")
-    } else{
-        this.renderer.setElementStyle(this.cardContent.nativeElement, "max-height", "500px")
-        
-    }
-    this.cardExpanded = !this.cardExpanded
   }
 
   filterplayers(team){
     return this.players.map(x => x.filter(y => y.team === team))
   }
 
-  submitGame(game: Game, gameplayers: GamePlayer){
-    
-    this.game.date = new Date()
-    this.game.name = 'Testthomas'
-    this.gameProvider.addGame(this.game)
-
-    this.navCtrl.setRoot(HometabPage)
-    this.navCtrl.popToRoot()
+  submitForm(form: NgForm){
+    this.model.date = new Date()
+    this.gameProvider.addGamePlayer(this.model)
   }
 
-    // onSubmit(player, team){
-  //   if(this.player.name != ''){
-  //     this.teamProvider.addPlayer(this.player, this.team)
-  //     this.player.name = ''
-      
-  //   }
-  // }
+  getPlayer(playerId){
+    this.playerDoc = this.afs.doc('players/'+playerId)
+    this.player = this.playerDoc.valueChanges()
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivegamePage');
     console.log(this.options)
-    console.log(this.team)
     this.filteredPlayers = this.filterplayers(this.team)
+
+    _.forEach(this.filteredPlayers, (player) => this.gameplayers.push({date:null,
+      name: player.name,points:'', rebounds:'',assists:'',steals:'',blocks:'',turnovers:''}))
     
+
+      console.log(this.gameplayers)
 }
 } 

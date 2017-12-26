@@ -4,7 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule, IonicPageModule } from 'ionic
 import { AngularFireModule } from 'angularfire2'
 import { AngularFireAuthModule } from "angularfire2/auth"
 import { AngularFirestoreModule } from "angularfire2/firestore"
-import { FormsModule } from "@angular/forms"
+import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -15,7 +15,6 @@ import { TeamplayersPage } from '../pages/teamplayers/teamplayers';
 import { GameteamPage } from '../pages/gameteam/gameteam';
 import { GamedetailsPage } from '../pages/gamedetails/gamedetails';
 import { LoginPage } from '../pages/login/login';
-
 
 
 @NgModule({
@@ -35,7 +34,8 @@ import { LoginPage } from '../pages/login/login';
     AngularFirestoreModule,
     AngularFirestoreModule.enablePersistence(),
     IonicPageModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

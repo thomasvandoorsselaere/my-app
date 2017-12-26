@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { Game } from '../../models/game';
 import { Observable } from 'rxjs/Observable';
 import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { GamePlayer } from '../../models/gameplayer';
 
 /**
  * Generated class for the GamedetailsPage page.
@@ -23,8 +24,9 @@ export class GamedetailsPage {
   gameDetails: Observable<Game[]>
   game: Observable<Game[]>
   gameId : Game
-  gamePlayersCollection: AngularFirestoreCollection<any>
+  gamePlayersCollection: AngularFirestoreCollection<GamePlayer>
   gamePlayers: Observable<any[]>
+
 
 
   constructor(
@@ -42,7 +44,7 @@ export class GamedetailsPage {
         })
       })
 
-      this.gamePlayersCollection = this.afs.collection(`game/Mfp7ZdK8FNF0OWVyASDM/players`)
+      this.gamePlayersCollection = this.afs.collection(`gamePlayers`)
       this.gamePlayers = this.gamePlayersCollection.snapshotChanges().map(changes => {
         return changes.map(a => {
           const data = a.payload.doc.data() as any
@@ -50,7 +52,7 @@ export class GamedetailsPage {
           return data
         })
       })
-      // ${this.gameId}
+      
       
       this.gameId = navParams.get("gameName")
   }
@@ -63,6 +65,7 @@ export class GamedetailsPage {
   filtergames(game){
     return this.gameDetails.map(x => x.filter(y => y.id === game))
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamedetailsPage');

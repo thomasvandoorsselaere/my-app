@@ -3,6 +3,7 @@ import {AngularFirestore, AngularFirestoreCollection,AngularFirestoreDocument } 
 import { Observable } from 'rxjs/Observable'
 import { Gameoptions } from '../../models/gameoptions';
 import { Game } from '../../models/game';
+import { GamePlayer } from '../../models/gameplayer';
 
 /*
   Generated class for the ProvidersGameProvider provider.
@@ -17,15 +18,16 @@ export class ProvidersGameProvider {
   Gameoptions: Observable<Gameoptions[]>
   gameHistory: Observable<Game[]>
   gameCollection: AngularFirestoreCollection<Game>
-  gameHistoryCollection: AngularFirestoreCollection<Game>
+  gamePlayerCollection: AngularFirestoreCollection<GamePlayer>
+
   gameDoc: AngularFirestoreDocument<Game>
   games: Observable<Game[]>
+  gamePlayers: Observable<GamePlayer[]>
 
   // array doorsturen is niet correct je hebt de [0] waarde nodig van die array
 
 
   constructor(public afs: AngularFirestore) {
-      this.gameCollection = this.afs.collection('game')
       this.Gameoptions = this.afs.collection('gameoptions').valueChanges()
       this.optionCollection = this.afs.collection('gameoptions')
       
@@ -47,6 +49,15 @@ export class ProvidersGameProvider {
             return data
           })
         })
+
+        this.gamePlayerCollection = this.afs.collection('gamePlayers')
+        this.gamePlayers = this.gamePlayerCollection.snapshotChanges().map(changes => {
+          return changes.map(a => {
+            const data = a.payload.doc.data() as GamePlayer
+            data.id = a.payload.doc.id
+            return data
+          })
+        })
   }
 
   getOptions(){
@@ -64,6 +75,11 @@ export class ProvidersGameProvider {
 
   addGame(game: Game){
     this.gameCollection.add(game)
+  }
+
+  addGamePlayer(gameplayer: GamePlayer){
+    console.log('posting gameplayer: ', gameplayer)
+    this.gamePlayerCollection.add(gameplayer)
   }
 
   deleteGame(game:Game){
