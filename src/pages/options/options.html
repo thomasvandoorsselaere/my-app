@@ -9,10 +9,10 @@
   <ion-navbar>
     <ion-title>Options</ion-title>
     <ion-buttons end>
-        <button (click)="logout()">
+      <button (click)="logout()">
         logout
-        </button>
-        </ion-buttons>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -20,9 +20,9 @@
 
 <ion-content padding>
   <ion-list no-border>
-        <ion-item *ngFor="let option of options | async">
-            <ion-toggle [checked]="option.status" (ionChange)="changeToggle(option)"></ion-toggle>
-            <ion-label> {{option.name}}</ion-label>
-        </ion-item>
-</ion-list>
+    <ion-item *ngFor="let option of options | async">
+      <ion-toggle [checked]="option.status" (ionChange)="changeToggle(option)"></ion-toggle>
+      <ion-label> {{option.name}}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

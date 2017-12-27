@@ -1,56 +1,51 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>activegame</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>activegame</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
 
-<form #form="ngForm" (submit)="submitForm(form)">
-    <div *ngFor="let player of filteredPlayers |async ; let i=index">
+    <form #form="ngForm" (submit)="submitForm(form)">
+        <ion-list no-border>
+            <div *ngFor="let player of filteredPlayers |async ; let i=index">
+                <div *ngIf="player.status">
+                    <div class="form-group">
+                        <ion-list-header>{{player.name}}</ion-list-header>
+                        <ion-item>
+                            <ion-label floating>Points</ion-label>
+                            <ion-input type="text" class="form-control" placeholder="Points" name="points" [(ngModel)]="model.points"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label floating>Rebounds</ion-label>
+                            <ion-input type="text" class="form-control" placeholder="Rebounds" name="rebounds" [(ngModel)]="model.rebounds"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label floating>Assists</ion-label>
+                            <ion-input type="text" class="form-control" placeholder="Assists" name="assists" [(ngModel)]="model.assists"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label floating>Steals</ion-label>
+                            <ion-input type="text" class="form-control" placeholder="Steals" name="steals" [(ngModel)]="model.steals"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label floating>Blocks</ion-label>
+                            <ion-input type="text" class="form-control" placeholder="Blocks" name="blocks" [(ngModel)]="model.blocks"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label floating>Turnovers</ion-label>
+                            <ion-input type="text" class="form-control" placeholder="Turnovers" name="turnovers" [(ngModel)]="model.turnovers"></ion-input>
+                        </ion-item>
+                    </div>
+                </div>
+            </div>
+        </ion-list>
+        <button ion-button full type="submit">OK</button>
+    </form>
+    Model: {{model | json}}
+    <br> Angular: {{form.value | json}}
 
-    
-    <div class="form-group">
-            <ion-label>Name</ion-label>
-            <ion-input type="text" class="form-control" placeholder="Name" name="name" [(ngModel)]="gameplayers.name[i]">{{player.name}}</ion-input>
-    </div>
-    <div class="form-group">
-            <ion-label>Points</ion-label>
-            <ion-input type="text" class="form-control" placeholder="Points" name="points" [(ngModel)]="model.points"></ion-input>
-    </div>
-    <div class="form-group">
-            <ion-label>Rebounds</ion-label>
-            <ion-input type="text" class="form-control" placeholder="Rebounds" name="rebounds" [(ngModel)]="model.rebounds"></ion-input>
-    </div>
-    <div class="form-group">
-            <ion-label>Assists</ion-label>
-            <ion-input type="text" class="form-control" placeholder="Assists" name="assists" [(ngModel)]="model.assists"></ion-input>
-    </div>
-    <div class="form-group">
-            <ion-label>Steals</ion-label>
-            <ion-input type="text" class="form-control" placeholder="Steals" name="steals" [(ngModel)]="model.steals"></ion-input>
-    </div>
-    <div class="form-group">
-            <ion-label>Blocks</ion-label>
-            <ion-input type="text" class="form-control" placeholder="Blocks" name="blocks" [(ngModel)]="model.blocks"></ion-input>
-    </div>
-    <div class="form-group">
-            <ion-label>Turnovers</ion-label>
-            <ion-input type="text" class="form-control" placeholder="Turnovers" name="turnovers" [(ngModel)]="model.turnovers"></ion-input>
-    </div>
-</div>
-
-    <button ion-button full type="submit">OK</button>
-</form>
-Model: {{gameplayers[0] | json}}
-Model: {{gameplayers[1] | json}}
-Model: {{gameplayers[2] | json}}
-<br>
-Angular: {{form.value | json}}
-
-<br>
+    <br>
 </ion-content>
-
- 

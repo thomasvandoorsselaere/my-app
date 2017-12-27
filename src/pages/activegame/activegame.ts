@@ -21,90 +21,110 @@ import { NgForm } from '@angular/forms/src/directives/ng_form';
   templateUrl: 'activegame.html',
 })
 export class ActivegamePage {
-  optionCollection : AngularFirestoreCollection<Gameoptions>
+  optionCollection: AngularFirestoreCollection<Gameoptions>
   options: Observable<Gameoptions[]>
   playersCollection: AngularFirestoreCollection<Player>
   players: Observable<Player[]>
-  currentPlayers: Player[];
-  filteredPlayers: Observable<Player[]>
   team: Team
-  cardExpanded: boolean= false
-  gameplayers:GamePlayer[] = [];
+  filteredPlayers: Observable<Player[]>
   game: any = {
 
   }
-  playerDoc: AngularFirestoreDocument<Player>
-  player: Observable<Player>
 
+  model: GamePlayer = {}
+  models = [
+    {
+      name: "",
+      points: "",
+      rebounds: "",
+      assists: "",
+      steals: "",
+      blocks: "",
+      turnovers: ""
+    }
+  ]
 
-  model = new GamePlayer(null,'','','','','','','')
-  
+  gamePlayers: Player[]
 
   constructor(
     public renderer: Renderer,
     public navCtrl: NavController,
-    public gameProvider: ProvidersGameProvider, 
+    public gameProvider: ProvidersGameProvider,
     public afs: AngularFirestore,
     public navParams: NavParams) {
 
-      this.optionCollection = this.afs.collection('gameoptions')
-      
-        this.options = this.optionCollection.snapshotChanges().map(changes => {
-          return changes.map(a => {
-            const data = a.payload.doc.data() as Gameoptions
-            data.id = a.payload.doc.id
-            return data
-          })
-        })
-    
-      this.playersCollection = this.afs.collection('players')
+    this.optionCollection = this.afs.collection('gameoptions')
 
-        this.players = this.playersCollection.snapshotChanges().map(changes => {
-          return changes.map(a => {
-            const data = a.payload.doc.data() as Player
-            data.id = a.payload.doc.id
-            return data
-          })
-        })
+    this.options = this.optionCollection.snapshotChanges().map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as Gameoptions
+        data.id = a.payload.doc.id
+        return data
+      })
+    })
 
-        // _.forEach(this.players, (player) => { this.gameplayers.push({name:player.name})})
-        // _.forEach(this.players, (player) => {
-        //   console.log(player.name)
-        //   this.gameplayers.push({name: player.name})
-          
-        // } )
-  
-        // this.options.subscribe((options) =>{
-        //   _.forEach(this.players, (player) => {player.options = options})
-        // });
+    this.playersCollection = this.afs.collection('players')
 
-      this.team = navParams.get("chosenTeam")
+    this.players = this.playersCollection.snapshotChanges().map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as Player
+        data.id = a.payload.doc.id
+        return data
+      })
+    })
+
+
+    this.team = navParams.get("chosenTeam")
 
   }
 
-  filterplayers(team){
+  filterplayers(team) {
     return this.players.map(x => x.filter(y => y.team === team))
   }
 
-  submitForm(form: NgForm){
+  submitForm(form: NgForm, game: Game) {
     this.model.date = new Date()
+    this.game.date = this.model.date
+    this.game.name = "Game"
+    this.gameProvider.addGame(this.game)
+
+    
     this.gameProvider.addGamePlayer(this.model)
   }
 
-  getPlayer(playerId){
-    this.playerDoc = this.afs.doc('players/'+playerId)
-    this.player = this.playerDoc.valueChanges()
-  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivegamePage');
     console.log(this.options)
     this.filteredPlayers = this.filterplayers(this.team)
-
-    _.forEach(this.filteredPlayers, (player) => this.gameplayers.push({date:null,
-      name: player.name,points:'', rebounds:'',assists:'',steals:'',blocks:'',turnovers:''}))
-    
-
-      console.log(this.gameplayers)
+  }
 }
-} 
+
+
+
+
+  // getPlayer(playerId){
+  //   this.playerDoc = this.afs.doc('players/'+playerId)
+  //   this.player = this.playerDoc.valueChanges()
+  // }
+
+
+
+
+
+        // _.forEach(this.players, (player) => { this.gameplayers.push({name:player.name})})
+        // _.forEach(this.players, (player) => {
+        //   console.log(player.name)
+        //   this.gameplayers.push({name: player.name})
+
+        // } )
+
+        // this.options.subscribe((options) =>{
+        //   _.forEach(this.players, (player) => {player.options = options})
+        // });
+
+
+
+    // _.forEach(this.gameplayers, function(player){
+    //   console.log(player.name)
+    // })

@@ -9,23 +9,23 @@
   <ion-navbar>
     <ion-title>Teams</ion-title>
     <ion-buttons end>
-        <button (click)="logout()">
+      <button (click)="logout()">
         logout
-        </button>
-        </ion-buttons>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-      <ion-list>
-          <button ion-item *ngFor="let team of filteredTeams | async" (click)="teamPlayers(team)">{{team.name}}
-              <ion-icon name="trash" (click)="teamDelete(team)" item-end></ion-icon>
-          </button>
-          
-      </ion-list>
-    
-    <br>
-    <button ion-button full (click)="addteambutton()">add team</button>
+  <ion-list>
+    <button ion-item *ngFor="let team of filteredTeams | async" (click)="teamPlayers(team)">{{team.name}}
+      <ion-icon name="trash" (click)="teamDelete(team)" item-end></ion-icon>
+    </button>
+
+  </ion-list>
+
+  <br>
+  <button ion-button full (click)="addteambutton()">add team</button>
 </ion-content>

@@ -9,21 +9,21 @@
   <ion-navbar>
     <ion-title>Games</ion-title>
     <ion-buttons end>
-        <button (click)="logout()">
+      <button (click)="logout()">
         logout
-        </button>
-        </ion-buttons>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <ion-list no-border>
-        <button ion-item *ngFor="let game of games | async" (click)="gamedetail(game)">{{game.name}}
-            <ion-icon name="trash" (click)="gameDelete(game)" item-end></ion-icon>
-        </button>
-        
-</ion-list>
-  <button (click)="newGame()" ion-button full >Start new Game</button>
+  <ion-list no-border>
+    <button ion-item *ngFor="let game of games | async" (click)="gamedetail(game)">{{game.name}}
+      <ion-icon name="trash" (click)="gameDelete(game)" item-end></ion-icon>
+    </button>
+
+  </ion-list>
+  <button (click)="newGame()" ion-button full>Start new Game</button>
 </ion-content>

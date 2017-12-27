@@ -8,7 +8,10 @@
 
   <ion-navbar>
     <ion-title>gamedetails</ion-title>
-    <ion-buttons start><button (click)="dismiss()"><ion-icon name='arrow-back'></ion-icon></button>          
+    <ion-buttons start>
+      <button (click)="dismiss()">
+        <ion-icon name='arrow-back'></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 
@@ -18,45 +21,31 @@
 <ion-content padding>
   <div *ngFor="let game of game | async; let i=index">
     <ion-label>Game :</ion-label>
-  <ion-item>{{game.name}}</ion-item>
-  <ion-label>Date: </ion-label>
-  <ion-item>{{game.date}}</ion-item>
+    <ion-item>{{game.name}}</ion-item>
+    <ion-label>Date: </ion-label>
+    <ion-item>{{game.date}}</ion-item>
   </div>
-
-  <!-- <div *ngFor="let player of gamePlayers | async">
-    <ion-list>
-      <ion-list-header>Players</ion-list-header>
-      <ion-item>{{player.name}}</ion-item>
-      <ion-item>{{player.stats.points}}</ion-item>
-      <ion-item>{{player.stats.assists}}</ion-item>
-      <ion-item>{{player.stats.rebounds}}</ion-item>
-    </ion-list>
-    
-
-
-  </div> -->
-
   <ion-item>
-      <ion-label>Players</ion-label>
-     
-      <ion-select [(ngModel)]="players" okText="Okay" cancelText="Dismiss">
-        <ion-option *ngFor="let player of gamePlayers |async" [value]="player">{{player.name}}</ion-option>
-      </ion-select>
-    </ion-item>
+    <ion-label>Players</ion-label>
 
-    <div *ngIf="valueselected; else showdetails"><h1>select a player!</h1> </div>
+    <ion-select [(ngModel)]="players" okText="Okay" cancelText="Dismiss">
+      <ion-option *ngFor="let player of gamePlayers |async" [value]="player">{{player.name}}</ion-option>
+    </ion-select>
+  </ion-item>
 
-    <ng-template #showdetails>
-        
-        <div *ngFor="let player of gamePlayers | async">
-          <ion-list>
-            <ion-list-header>Players details</ion-list-header>
-              <ion-item>{{player.stats.points}}</ion-item>
-              <ion-item>{{player.stats.assists}}</ion-item>
-              <ion-item>{{player.stats.rebounds}}</ion-item>
-          </ion-list>
+  <div *ngIf="valueselected; else showdetails">
+    <h1>select a player!</h1>
   </div>
-      </ng-template>
+
+  <ng-template #showdetails>
+
+    <div *ngFor="let player of gamePlayers | async">
+      <ion-list>
+        <ion-list-header>Details Game {{player.name}}</ion-list-header>
+        <ion-item>{{player.points}}</ion-item>
+        <ion-item>{{player.assists}}</ion-item>
+        <ion-item>{{player.rebounds}}</ion-item>
+      </ion-list>
+    </div>
+  </ng-template>
 </ion-content>
-
-
