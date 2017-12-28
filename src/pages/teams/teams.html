@@ -20,10 +20,10 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let team of filteredTeams | async" (click)="teamPlayers(team)">{{team.name}}
+    <ion-item *ngFor="let team of filteredTeams | async">
+      <button ion-button color="dark" clear (click)="teamPlayers(team)">{{team.name}}</button>
       <ion-icon name="trash" (click)="teamDelete(team)" item-end></ion-icon>
-    </button>
-
+    </ion-item>
   </ion-list>
 
   <br>

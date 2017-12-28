@@ -20,9 +20,12 @@
 
 <ion-content padding>
   <ion-list no-border>
-    <button ion-item *ngFor="let game of games | async" (click)="gamedetail(game)">{{game.name}}
+    <ion-item *ngFor="let game of games | async">
+      <button ion-button color="dark" clear (click)="gamedetail(game)">{{game.name}}</button>
       <ion-icon name="trash" (click)="gameDelete(game)" item-end></ion-icon>
-    </button>
+    </ion-item>
+
+
 
   </ion-list>
   <button (click)="newGame()" ion-button full>Start new Game</button>

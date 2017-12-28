@@ -85,6 +85,8 @@ export class TeamsPage {
               this.team.name = data.team
               this.teamProvider.addTeam(this.team)
               this.team.name = ''
+              this.navCtrl.setRoot(TeamsPage)
+              this.navCtrl.popToRoot
             }
           }
         }

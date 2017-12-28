@@ -79,6 +79,7 @@ export class TeamplayersPage {
               this.teamProvider.addPlayer(this.player, this.team)
               this.player.name = ''
               this.player.team = ''
+              this.ionViewDidLoad()
             }
           }
         }
