@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Player } from '../../models/player';
 import { ProvidersTeamsProvider } from '../../providers/providers-teams/providers-teams';
 import { Team } from '../../models/team';
+import { HometabPage } from '../hometab/hometab';
 
 /**
  * Generated class for the GameplayersPage page.
@@ -64,6 +65,10 @@ export class GameplayersPage {
     modal.present()
   }
 
+  close(){
+    this.navCtrl.setRoot(HometabPage)
+    this.navCtrl.popToRoot()
+  }
   ionViewDidEnter () {
     console.log('ionViewDidLoad GameplayersPage');
     this.filteredPlayers = this.filterplayers(this.chosenTeam)

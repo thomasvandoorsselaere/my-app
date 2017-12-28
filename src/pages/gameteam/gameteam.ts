@@ -5,6 +5,7 @@ import { Team } from '../../models/team';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { HometabPage } from '../hometab/hometab';
 
 /**
  * Generated class for the GameteamPage page.
@@ -49,6 +50,11 @@ export class GameteamPage {
       chosenTeam: team.name
     })
     modal.present()
+  }
+
+  close(){
+    this.navCtrl.setRoot(HometabPage)
+    this.navCtrl.popToRoot
   }
 
   filterteams(UserId){
