@@ -13,31 +13,33 @@
             <div *ngFor="let player of filteredPlayers |async ; let i=index">
                 <div *ngIf="player.status">
                     <div class="form-group">
-                        <ion-list-header>{{player.name}}</ion-list-header>
+                        <ion-item-group>
+                        <ion-item-divider color="light">{{player.name}}</ion-item-divider>
                         <ion-item>
                             <ion-label floating>Points</ion-label>
-                            <ion-input type="text" class="form-control" placeholder="Points" name="points" [(ngModel)]="model.points"></ion-input>
+                            <ion-input type="text" class="form-control" name="points" [(ngModel)]="model.points"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label floating>Rebounds</ion-label>
-                            <ion-input type="text" class="form-control" placeholder="Rebounds" name="rebounds" [(ngModel)]="model.rebounds"></ion-input>
+                            <ion-input type="text" class="form-control" name="rebounds" [(ngModel)]="model.rebounds"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label floating>Assists</ion-label>
-                            <ion-input type="text" class="form-control" placeholder="Assists" name="assists" [(ngModel)]="model.assists"></ion-input>
+                            <ion-input type="text" class="form-control" name="assists" [(ngModel)]="model.assists"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label floating>Steals</ion-label>
-                            <ion-input type="text" class="form-control" placeholder="Steals" name="steals" [(ngModel)]="model.steals"></ion-input>
+                            <ion-input type="text" class="form-control" name="steals" [(ngModel)]="model.steals"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label floating>Blocks</ion-label>
-                            <ion-input type="text" class="form-control" placeholder="Blocks" name="blocks" [(ngModel)]="model.blocks"></ion-input>
+                            <ion-input type="text" class="form-control" name="blocks" [(ngModel)]="model.blocks"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label floating>Turnovers</ion-label>
-                            <ion-input type="text" class="form-control" placeholder="Turnovers" name="turnovers" [(ngModel)]="model.turnovers"></ion-input>
+                            <ion-input type="text" class="form-control" name="turnovers" [(ngModel)]="model.turnovers"></ion-input>
                         </ion-item>
+                    </ion-item-group>
                     </div>
                 </div>
             </div>

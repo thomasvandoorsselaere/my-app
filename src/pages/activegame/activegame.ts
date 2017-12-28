@@ -27,24 +27,11 @@ export class ActivegamePage {
   players: Observable<Player[]>
   team: Team
   filteredPlayers: Observable<Player[]>
-  game: any = {
-
-  }
-
+  game: any = {}
   model: GamePlayer = {}
-  models = [
-    {
-      name: "",
-      points: "",
-      rebounds: "",
-      assists: "",
-      steals: "",
-      blocks: "",
-      turnovers: ""
-    }
-  ]
+  
 
-  gamePlayers: Player[]
+
 
   constructor(
     public renderer: Renderer,
@@ -90,8 +77,10 @@ export class ActivegamePage {
 
     
     this.gameProvider.addGamePlayer(this.model)
-  }
 
+    this.navCtrl.setRoot(HometabPage)
+    this.navCtrl.popToRoot()
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivegamePage');

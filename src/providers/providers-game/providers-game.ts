@@ -19,6 +19,7 @@ export class ProvidersGameProvider {
   gameHistory: Observable<Game[]>
   gameCollection: AngularFirestoreCollection<Game>
   gamePlayerCollection: AngularFirestoreCollection<GamePlayer>
+  gamePlayersDoc: AngularFirestoreDocument<GamePlayer>
 
   gameDoc: AngularFirestoreDocument<Game>
   games: Observable<Game[]>
@@ -83,7 +84,8 @@ export class ProvidersGameProvider {
   }
 
   deleteGame(game:Game){
-    this.gameDoc = this.afs.doc(`team/${game.id}`)
+    this.gameDoc = this.afs.doc(`game/${game.id}`)
+    // this.gamePlayersDoc = this.afs.doc(`gamePlayers/${game.date}`)
     this.gameDoc.delete()
   }
   
