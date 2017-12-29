@@ -8,7 +8,7 @@ import { GameteamPage } from '../gameteam/gameteam';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../login/login';
 import { ProvidersGameProvider } from '../../providers/providers-game/providers-game';
-import { Team } from '../../models/team';
+import { GamePlayer } from '../../models/gameplayer';
 
 /**
  * Generated class for the GamesPage page.
@@ -26,6 +26,8 @@ export class GamesPage {
 
 gameCollection: AngularFirestoreCollection<Game>
 games: Observable<Game[]>
+gamePlayersCollection: AngularFirestoreCollection<GamePlayer>
+gamePlayers: Observable<GamePlayer[]>
 game: Game = {
 
 }
@@ -45,6 +47,15 @@ game: Game = {
       this.games = this .gameCollection.snapshotChanges().map(changes => {
         return changes.map(a => {
           const data = a.payload.doc.data() as Game
+          data.id = a.payload.doc.id
+          return data
+        })
+      })
+
+      this.gamePlayersCollection = this.afs.collection(`gamePlayers`)
+      this.gamePlayers = this.gamePlayersCollection.snapshotChanges().map(changes => {
+        return changes.map(a => {
+          const data = a.payload.doc.data() as any
           data.id = a.payload.doc.id
           return data
         })
@@ -69,6 +80,7 @@ game: Game = {
 
   gameDelete(game: Game){
     this.gameProvider.deleteGame(game);
+  
   }
 
   logout(){

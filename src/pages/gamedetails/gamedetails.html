@@ -26,14 +26,14 @@
   </div>
   <ion-item>
     <ion-label>Players</ion-label>
-    <ion-select [(ngModel)]="players">
-      <ion-option *ngFor="let player of filteredPlayers |async" [value]="player">{{player.name}}</ion-option>
+    <ion-select [(ngModel)]="player" (ngModelChange)="filterPlayer(player)" >
+      <ion-option *ngFor="let player of filteredPlayers |async" [value]="player" >{{player.name}}</ion-option>
     </ion-select>
   </ion-item>
 
   <br>
   <br>
-    <div *ngFor="let player of filteredPlayers | async">
+    <div *ngFor="let player of filteredPlayer |async">
       <ion-list>
         <h2>Game stats: {{player.name}}</h2>
         <ion-item>Points: {{player.points}}</ion-item>

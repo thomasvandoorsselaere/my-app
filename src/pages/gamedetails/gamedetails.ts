@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Game } from '../../models/game';
 import { Observable } from 'rxjs/Observable';
-import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { GamePlayer } from '../../models/gameplayer';
-import { Player } from '../../models/player';
 
 /**
  * Generated class for the GamedetailsPage page.
@@ -24,41 +23,42 @@ export class GamedetailsPage {
   gameCollection: AngularFirestoreCollection<Game>
   gameDetails: Observable<Game[]>
   game: Observable<Game[]>
-  gameId : Game
-  gameID : Game
+  gameId: Game
+  gameID: Game
   gamePlayersCollection: AngularFirestoreCollection<GamePlayer>
   gamePlayers: Observable<GamePlayer[]>
   filteredPlayers: Observable<GamePlayer[]>
-
-
+  // filteredPlayer: Observable<GamePlayer[]>
+  filteredPlayer: GamePlayer[]
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public viewCtrl: ViewController,
     public afs: AngularFirestore,
     public navParams: NavParams) {
 
-      this.gameCollection = this.afs.collection('game')
-      this.gameDetails = this.gameCollection.snapshotChanges().map(changes => {
-        return changes.map(a => {
-          const data = a.payload.doc.data() as Game
-          data.id = a.payload.doc.id
-          return data
-        })
+    this.gameCollection = this.afs.collection('game')
+    this.gameDetails = this.gameCollection.snapshotChanges().map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as Game
+        data.id = a.payload.doc.id
+        return data
       })
+    })
 
-      this.gamePlayersCollection = this.afs.collection(`gamePlayers`)
-      this.gamePlayers = this.gamePlayersCollection.snapshotChanges().map(changes => {
-        return changes.map(a => {
-          const data = a.payload.doc.data() as any
-          data.id = a.payload.doc.id
-          return data
-        })
+    this.gamePlayersCollection = this.afs.collection(`gamePlayers`)
+    this.gamePlayers = this.gamePlayersCollection.snapshotChanges().map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as any
+        data.id = a.payload.doc.id
+        return data
       })
-      
-      
-      this.gameId = navParams.get("gameName")
-      this.gameID = navParams.get("gameID")
+    })
+
+
+    this.gameId = navParams.get("gameName")
+    this.gameID = navParams.get("gameID")
+    console.log(this.filteredPlayer)
   }
 
 
@@ -66,21 +66,24 @@ export class GamedetailsPage {
     this.viewCtrl.dismiss();
   }
 
-  filtergames(game){
+  filtergames(game) {
     return this.gameDetails.map(x => x.filter(y => y.id === game))
   }
-  filterPlayers(game){
+  filterPlayers(game) {
     return this.gamePlayers.map(x => x.filter(y => y.gameId === game))
   }
+
+  filterPlayer(player) {
+    this.filteredPlayer = player
+    return this.filteredPlayer
+  }
+
 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamedetailsPage');
     this.game = this.filtergames(this.gameId)
     this.filteredPlayers = this.filterPlayers(this.gameID)
-    console.log(this.gameId)
-    console.log(this.gameID)
-    console.log(this.gamePlayers)
   }
 
 }

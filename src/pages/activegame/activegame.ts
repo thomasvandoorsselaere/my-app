@@ -1,17 +1,16 @@
-import { Component, ViewChild, Renderer } from '@angular/core';
+import { Component, Renderer } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Player } from '../../models/player';
 
 import { Gameoptions } from '../../models/gameoptions';
 import { Team } from '../../models/team';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { HometabPage } from '../hometab/hometab';
 import { Game } from '../../models/game';
 import { ProvidersGameProvider } from '../../providers/providers-game/providers-game';
 import { GamePlayer } from '../../models/gameplayer';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import * as _ from 'lodash';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 
@@ -30,6 +29,12 @@ export class ActivegamePage {
   game: any = {}
   public id : number = 0
   models: GamePlayer[] = []
+  gameOptionPoints: Observable<Gameoptions[]>
+  gameOptionAssists: Observable<Gameoptions[]>
+  gameOptionRebounds: Observable<Gameoptions[]>
+  gameOptionSteals: Observable<Gameoptions[]>
+  gameOptionBlocks: Observable<Gameoptions[]>
+  gameOptionTurnovers: Observable<Gameoptions[]>
 
 
   constructor(
@@ -75,6 +80,15 @@ export class ActivegamePage {
     return formattedDate
   }
 
+  filterOptions(){
+    this.gameOptionPoints = this.options.map(x => x.filter(y =>y.name === "points"))
+    this.gameOptionAssists = this.options.map(x => x.filter(y =>y.name === "assists"))
+    this.gameOptionRebounds = this.options.map(x => x.filter(y =>y.name === "rebounds"))
+    this.gameOptionSteals = this.options.map(x => x.filter(y =>y.name === "steals"))
+    this.gameOptionBlocks = this.options.map(x => x.filter(y =>y.name === "blocks"))
+    this.gameOptionTurnovers = this.options.map(x => x.filter(y =>y.name === "turnovers"))
+  }
+
   submitForm(form: NgForm, game: Game) {
     
     //adding the game to the db
@@ -102,8 +116,10 @@ export class ActivegamePage {
     console.log(this.options)
     this.filteredPlayers = this.filterplayers(this.team)
     this.filteredPlayers.subscribe(players => _.forEach(players, (player) => { this.models.push({ name: player.name }) }))
+    this.filterOptions()
 
     console.log(this.models)
+    console.log(this.gameOptionPoints)
 
   }
 }
