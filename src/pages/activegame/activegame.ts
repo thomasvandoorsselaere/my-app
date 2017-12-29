@@ -28,7 +28,6 @@ export class ActivegamePage {
   team: Team
   filteredPlayers: Observable<Player[]>
   game: any = {}
-  model: GamePlayer = {}
   public id : number = 0
   models: GamePlayer[] = []
 
@@ -71,16 +70,19 @@ export class ActivegamePage {
 
   submitForm(form: NgForm, game: Game) {
     this.id++
+    //adding the game to the db
+    this.game.date = new Date()
+    this.game.name = "Game"+this.id
+
+    this.gameProvider.addGame(this.game)
 
     for (let m in this.models) {
-        this.models[m].date = new Date()
-        this.gameProvider.addGamePlayer(this.model[m])
+        this.models[m].date = this.game.date
+        this.gameProvider.addGamePlayer(this.models[m])
     }
    
-    // this.models[0].date = new Date()
-    // this.gameProvider.addGamePlayer(this.models[0])
-     this.game.date = this.models[0].date
-    this.game.name = "Game"+this.id
+
+
     console.log(this.models)
     this.navCtrl.setRoot(HometabPage)
     this.navCtrl.popToRoot()
@@ -96,32 +98,3 @@ export class ActivegamePage {
 
   }
 }
-
-
-
-
-  // getPlayer(playerId){
-  //   this.playerDoc = this.afs.doc('players/'+playerId)
-  //   this.player = this.playerDoc.valueChanges()
-  // }
-
-
-
-
-
-        // _.forEach(this.players, (player) => { this.gameplayers.push({name:player.name})})
-        // _.forEach(this.players, (player) => {
-        //   console.log(player.name)
-        //   this.gameplayers.push({name: player.name})
-
-        // } )
-
-        // this.options.subscribe((options) =>{
-        //   _.forEach(this.players, (player) => {player.options = options})
-        // });
-
-
-
-    // _.forEach(this.gameplayers, function(player){
-    //   console.log(player.name)
-    // })
