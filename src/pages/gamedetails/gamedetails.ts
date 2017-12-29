@@ -25,7 +25,7 @@ export class GamedetailsPage {
   gameDetails: Observable<Game[]>
   game: Observable<Game[]>
   gameId : Game
-  gameDate : Game
+  gameID : Game
   gamePlayersCollection: AngularFirestoreCollection<GamePlayer>
   gamePlayers: Observable<GamePlayer[]>
   filteredPlayers: Observable<GamePlayer[]>
@@ -58,7 +58,7 @@ export class GamedetailsPage {
       
       
       this.gameId = navParams.get("gameName")
-      this.gameDate = navParams.get("gameDate")
+      this.gameID = navParams.get("gameID")
   }
 
 
@@ -70,16 +70,16 @@ export class GamedetailsPage {
     return this.gameDetails.map(x => x.filter(y => y.id === game))
   }
   filterPlayers(game){
-    return this.gamePlayers.map(x => x.filter(y => y.date === game))
+    return this.gamePlayers.map(x => x.filter(y => y.gameId === game))
   }
 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamedetailsPage');
     this.game = this.filtergames(this.gameId)
-    this.filteredPlayers = this.filterPlayers(this.gameDate)
+    this.filteredPlayers = this.filterPlayers(this.gameID)
     console.log(this.gameId)
-    console.log(this.gameDate)
+    console.log(this.gameID)
     console.log(this.gamePlayers)
   }
 

@@ -8,7 +8,8 @@ export class GamePlayer {
         public assists?: string,
         public steals?: string,
         public blocks?: string,
-        public turnovers?: string
+        public turnovers?: string,
+        public gameId?: string
     )
     {
 

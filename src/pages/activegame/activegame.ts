@@ -66,18 +66,27 @@ export class ActivegamePage {
     return this.players.map(x => x.filter(y => y.team === team))
   }
 
-  submitForm(form: NgForm, game: Game) {
-    this.id++
-    //adding the game to the db
-    this.game.date =  Date.now()
-    this.game.name = "Game"+this.id
+  getDate() {
+    let date = new Date();
+    let month = date.getMonth(); 
+    let day = date.getDate();
+    let year = date.getFullYear();
+    let formattedDate = day +"-"+ month +"-"+ year
+    return formattedDate
+  }
 
+  submitForm(form: NgForm, game: Game) {
+    
+    //adding the game to the db
+    this.game.gameId =  Date.now()
+    this.game.name = "Game "+ this.team +" "+this.getDate()
+    this.game.date = this.getDate()
     this.gameProvider.addGame(this.game)
     
 
 
     for (let m in this.models) {
-        this.models[m].date = this.game.date
+        this.models[m].gameId = this.game.gameId
         this.gameProvider.addGamePlayer(this.models[m])
     }
    

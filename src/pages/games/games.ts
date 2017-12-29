@@ -58,7 +58,7 @@ game: Game = {
   }
 
   gamedetail(game : Game){
-    let modalGameDetail = this.modelCtrl.create(GamedetailsPage,{gameName: game.id, gameDate: game.date})
+    let modalGameDetail = this.modelCtrl.create(GamedetailsPage,{gameName: game.id, gameID: game.gameId})
     modalGameDetail.present()
   }
 

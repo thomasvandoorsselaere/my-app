@@ -1,5 +1,6 @@
 export interface Game {
     id?: string;
     name?: string;
-    date?: Date;
+    date?: string;
+    gameId?: String
 }
