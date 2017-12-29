@@ -17,28 +17,29 @@
                         <ion-item-divider color="light">{{player.name}}</ion-item-divider>
                         <ion-item>
                             <ion-label floating>Points</ion-label>
-                            <ion-input type="text" class="form-control" name="points" [(ngModel)]="model.points"></ion-input>
+                            <ion-input type="text" class="form-control" name="points" [(ngModel)]="models[i].points"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label floating>Rebounds</ion-label>
-                            <ion-input type="text" class="form-control" name="rebounds" [(ngModel)]="model.rebounds"></ion-input>
+                            <ion-input type="text" class="form-control" name="rebounds" [(ngModel)]="models[i].rebounds"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label floating>Assists</ion-label>
-                            <ion-input type="text" class="form-control" name="assists" [(ngModel)]="model.assists"></ion-input>
+                            <ion-input type="text" class="form-control" name="assists" [(ngModel)]="models[i].assists"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label floating>Steals</ion-label>
-                            <ion-input type="text" class="form-control" name="steals" [(ngModel)]="model.steals"></ion-input>
+                            <ion-input type="text" class="form-control" name="steals" [(ngModel)]="models[i].steals"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label floating>Blocks</ion-label>
-                            <ion-input type="text" class="form-control" name="blocks" [(ngModel)]="model.blocks"></ion-input>
+                            <ion-input type="text" class="form-control" name="blocks" [(ngModel)]="models[i].blocks"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label floating>Turnovers</ion-label>
-                            <ion-input type="text" class="form-control" name="turnovers" [(ngModel)]="model.turnovers"></ion-input>
+                            <ion-input type="text" class="form-control" name="turnovers" [(ngModel)]="models[i].turnovers"></ion-input>
                         </ion-item>
+                        <br>
                     </ion-item-group>
                     </div>
                 </div>
@@ -46,7 +47,9 @@
         </ion-list>
         <button ion-button full type="submit">OK</button>
     </form>
-    Model: {{model | json}}
+
+
+    Model: {{models[0] | json}}
     <br> Angular: {{form.value | json}}
 
     <br>

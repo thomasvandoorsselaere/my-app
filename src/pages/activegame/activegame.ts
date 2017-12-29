@@ -29,8 +29,8 @@ export class ActivegamePage {
   filteredPlayers: Observable<Player[]>
   game: any = {}
   model: GamePlayer = {}
-  
-
+  public id : number = 0
+  models: GamePlayer[] = []
 
 
   constructor(
@@ -70,14 +70,18 @@ export class ActivegamePage {
   }
 
   submitForm(form: NgForm, game: Game) {
-    this.model.date = new Date()
-    this.game.date = this.model.date
-    this.game.name = "Game"
-    this.gameProvider.addGame(this.game)
+    this.id++
 
-    
-    this.gameProvider.addGamePlayer(this.model)
-
+    for (let m in this.models) {
+        this.models[m].date = new Date()
+        this.gameProvider.addGamePlayer(this.model[m])
+    }
+   
+    // this.models[0].date = new Date()
+    // this.gameProvider.addGamePlayer(this.models[0])
+     this.game.date = this.models[0].date
+    this.game.name = "Game"+this.id
+    console.log(this.models)
     this.navCtrl.setRoot(HometabPage)
     this.navCtrl.popToRoot()
   }
@@ -86,6 +90,10 @@ export class ActivegamePage {
     console.log('ionViewDidLoad ActivegamePage');
     console.log(this.options)
     this.filteredPlayers = this.filterplayers(this.team)
+    this.filteredPlayers.subscribe(players => _.forEach(players, (player) => { this.models.push({ name: player.name }) }))
+
+    console.log(this.models)
+
   }
 }
 

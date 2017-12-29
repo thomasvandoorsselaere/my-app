@@ -20,32 +20,25 @@
 
 <ion-content padding>
   <div *ngFor="let game of game | async; let i=index">
-    <ion-label>Game :</ion-label>
-    <ion-item>{{game.name}}</ion-item>
-    <ion-label>Date: </ion-label>
-    <ion-item>{{game.date}}</ion-item>
+    <h2>Game info</h2>
+    <ion-item>Game : {{game.name}}</ion-item>
+    <ion-item>Date: {{game.date}}</ion-item>
   </div>
   <ion-item>
     <ion-label>Players</ion-label>
-
-    <ion-select [(ngModel)]="players" okText="Okay" cancelText="Dismiss">
+    <ion-select [(ngModel)]="players">
       <ion-option *ngFor="let player of gamePlayers |async" [value]="player">{{player.name}}</ion-option>
     </ion-select>
   </ion-item>
 
-  <div *ngIf="valueselected; else showdetails">
-    <h1>select a player!</h1>
-  </div>
-
-  <ng-template #showdetails>
-
+  <br>
+  <br>
     <div *ngFor="let player of gamePlayers | async">
       <ion-list>
-        <ion-list-header>Details Game {{player.name}}</ion-list-header>
-        <ion-item>{{player.points}}</ion-item>
-        <ion-item>{{player.assists}}</ion-item>
-        <ion-item>{{player.rebounds}}</ion-item>
+        <h2>Game stats: {{player.name}}</h2>
+        <ion-item>Points: {{player.points}}</ion-item>
+        <ion-item>Assists: {{player.assists}}</ion-item>
+        <ion-item>Rebounds: {{player.rebounds}}</ion-item>
       </ion-list>
     </div>
-  </ng-template>
 </ion-content>
