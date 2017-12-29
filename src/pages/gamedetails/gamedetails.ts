@@ -4,6 +4,7 @@ import { Game } from '../../models/game';
 import { Observable } from 'rxjs/Observable';
 import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { GamePlayer } from '../../models/gameplayer';
+import { Player } from '../../models/player';
 
 /**
  * Generated class for the GamedetailsPage page.
@@ -24,8 +25,10 @@ export class GamedetailsPage {
   gameDetails: Observable<Game[]>
   game: Observable<Game[]>
   gameId : Game
+  gameDate : Game
   gamePlayersCollection: AngularFirestoreCollection<GamePlayer>
-  gamePlayers: Observable<any[]>
+  gamePlayers: Observable<GamePlayer[]>
+  filteredPlayers: Observable<GamePlayer[]>
 
 
 
@@ -55,6 +58,7 @@ export class GamedetailsPage {
       
       
       this.gameId = navParams.get("gameName")
+      this.gameDate = navParams.get("gameDate")
   }
 
 
@@ -65,12 +69,17 @@ export class GamedetailsPage {
   filtergames(game){
     return this.gameDetails.map(x => x.filter(y => y.id === game))
   }
+  filterPlayers(game){
+    return this.gamePlayers.map(x => x.filter(y => y.date === game))
+  }
 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamedetailsPage');
     this.game = this.filtergames(this.gameId)
+    this.filteredPlayers = this.filterPlayers(this.gameDate)
     console.log(this.gameId)
+    console.log(this.gameDate)
     console.log(this.gamePlayers)
   }
 

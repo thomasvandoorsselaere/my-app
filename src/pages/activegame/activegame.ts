@@ -40,7 +40,6 @@ export class ActivegamePage {
     public navParams: NavParams) {
 
     this.optionCollection = this.afs.collection('gameoptions')
-
     this.options = this.optionCollection.snapshotChanges().map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Gameoptions
@@ -50,7 +49,6 @@ export class ActivegamePage {
     })
 
     this.playersCollection = this.afs.collection('players')
-
     this.players = this.playersCollection.snapshotChanges().map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Player
@@ -71,10 +69,12 @@ export class ActivegamePage {
   submitForm(form: NgForm, game: Game) {
     this.id++
     //adding the game to the db
-    this.game.date = new Date()
+    this.game.date =  Date.now()
     this.game.name = "Game"+this.id
 
     this.gameProvider.addGame(this.game)
+    
+
 
     for (let m in this.models) {
         this.models[m].date = this.game.date
