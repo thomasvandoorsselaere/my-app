@@ -78,7 +78,7 @@ filteredGamePlayers: Observable<GamePlayer[]>
   }
 
   filterplayers(game){
-    return this.gamePlayers.map(x => x.filter(y => y.gameId === game))
+    return this.gamePlayers.map(x => x.filter(y => y.gameId === game.gameId))
   }
 
   gameDelete(game: Game){

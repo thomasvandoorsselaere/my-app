@@ -24,6 +24,8 @@
     <ion-item>Game : {{game.name}}</ion-item>
     <ion-item>Date: {{game.date}}</ion-item>
   </div>
+  <br>
+  <h4>Please select a player to see stats.</h4>
   <ion-item>
     <ion-label>Players</ion-label>
     <ion-select [(ngModel)]="player" (ngModelChange)="filterPlayer(player)" >
@@ -33,7 +35,7 @@
 
   <br>
   <br>
-    <div *ngFor="let player of filteredPlayer |async">
+    <div *ngFor="let player of filteredPlayer">
       <ion-list>
         <h2>Game stats: {{player.name}}</h2>
         <ion-item>Points: {{player.points}}</ion-item>
@@ -44,4 +46,6 @@
         <ion-item>Turnovers: {{player.turnovers}}</ion-item>
       </ion-list>
     </div>
+
+    json filteredplayer: {{filteredPlayer|json}}
 </ion-content>

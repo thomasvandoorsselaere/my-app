@@ -14,53 +14,57 @@
                 <div *ngIf="player.status">
                     <div class="form-group">
                         <ion-item-group>
-                            <ion-item-divider color="light">{{player.name}}</ion-item-divider>
-                            <div *ngFor="let option of gameOptionPoints | async ;">
-                                <div *ngIf="option.status">
-                                    <ion-item>
-                                        <ion-label floating>Points</ion-label>
-                                        <ion-input type="text" class="form-control" name="points" [(ngModel)]="models[i].points"></ion-input>
-                                    </ion-item>
+                            <ion-item-divider color="light" (click)="toggleGroup(i)" [ngClass]="{active: isGroupShown(i)}">{{player.name}}
+                                <ion-icon color="success" item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+                            </ion-item-divider>
+                            <div *ngIf="isGroupShown(i)">
+                                <div *ngFor="let option of gameOptionPoints | async ;">
+                                    <div *ngIf="option.status">
+                                        <ion-item>
+                                            <ion-label floating>Points</ion-label>
+                                            <ion-input type="text" class="form-control" name="points" [(ngModel)]="models[i].points"></ion-input>
+                                        </ion-item>
+                                    </div>
                                 </div>
-                            </div>
-                            <div *ngFor="let option of gameOptionRebounds | async ;">
-                                <div *ngIf="option.status">
-                                    <ion-item>
-                                        <ion-label floating>Rebounds</ion-label>
-                                        <ion-input type="text" class="form-control" name="rebounds" [(ngModel)]="models[i].rebounds"></ion-input>
-                                    </ion-item>
+                                <div *ngFor="let option of gameOptionRebounds | async ;">
+                                    <div *ngIf="option.status">
+                                        <ion-item>
+                                            <ion-label floating>Rebounds</ion-label>
+                                            <ion-input type="text" class="form-control" name="rebounds" [(ngModel)]="models[i].rebounds"></ion-input>
+                                        </ion-item>
+                                    </div>
                                 </div>
-                            </div>
-                            <div *ngFor="let option of gameOptionAssists | async ;">
-                                <div *ngIf="option.status">
-                                    <ion-item>
-                                        <ion-label floating>Assists</ion-label>
-                                        <ion-input type="text" class="form-control" name="assists" [(ngModel)]="models[i].assists"></ion-input>
-                                    </ion-item>
+                                <div *ngFor="let option of gameOptionAssists | async ;">
+                                    <div *ngIf="option.status">
+                                        <ion-item>
+                                            <ion-label floating>Assists</ion-label>
+                                            <ion-input type="text" class="form-control" name="assists" [(ngModel)]="models[i].assists"></ion-input>
+                                        </ion-item>
+                                    </div>
                                 </div>
-                            </div>
-                            <div *ngFor="let option of gameOptionSteals | async ;">
-                                <div *ngIf="option.status">
-                                    <ion-item>
-                                        <ion-label floating>Steals</ion-label>
-                                        <ion-input type="text" class="form-control" name="steals" [(ngModel)]="models[i].steals"></ion-input>
-                                    </ion-item>
+                                <div *ngFor="let option of gameOptionSteals | async ;">
+                                    <div *ngIf="option.status">
+                                        <ion-item>
+                                            <ion-label floating>Steals</ion-label>
+                                            <ion-input type="text" class="form-control" name="steals" [(ngModel)]="models[i].steals"></ion-input>
+                                        </ion-item>
+                                    </div>
                                 </div>
-                            </div>
-                            <div *ngFor="let option of gameOptionBlocks | async ;">
-                                <div *ngIf="option.status">
-                                    <ion-item>
-                                        <ion-label floating>Blocks</ion-label>
-                                        <ion-input type="text" class="form-control" name="blocks" [(ngModel)]="models[i].blocks"></ion-input>
-                                    </ion-item>
+                                <div *ngFor="let option of gameOptionBlocks | async ;">
+                                    <div *ngIf="option.status">
+                                        <ion-item>
+                                            <ion-label floating>Blocks</ion-label>
+                                            <ion-input type="text" class="form-control" name="blocks" [(ngModel)]="models[i].blocks"></ion-input>
+                                        </ion-item>
+                                    </div>
                                 </div>
-                            </div>
-                            <div *ngFor="let option of gameOptionTurnovers | async ;">
-                                <div *ngIf="option.status">
-                                    <ion-item>
-                                        <ion-label floating>Turnovers</ion-label>
-                                        <ion-input type="text" class="form-control" name="turnovers" [(ngModel)]="models[i].turnovers"></ion-input>
-                                    </ion-item>
+                                <div *ngFor="let option of gameOptionTurnovers | async ;">
+                                    <div *ngIf="option.status">
+                                        <ion-item>
+                                            <ion-label floating>Turnovers</ion-label>
+                                            <ion-input type="text" class="form-control" name="turnovers" [(ngModel)]="models[i].turnovers"></ion-input>
+                                        </ion-item>
+                                    </div>
                                 </div>
                             </div>
                             <br>
@@ -73,7 +77,7 @@
 
 
 
-    </form>
 
+    </form>
     <br>
 </ion-content>

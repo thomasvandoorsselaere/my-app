@@ -34,6 +34,7 @@ export class ActivegamePage {
   gameOptionSteals: Observable<Gameoptions[]>
   gameOptionBlocks: Observable<Gameoptions[]>
   gameOptionTurnovers: Observable<Gameoptions[]>
+  shownGroup = null;
 
 
   constructor(
@@ -99,7 +100,7 @@ export class ActivegamePage {
 
     //adding players to the db
     for (let m in this.models) {
-      if(this.models[m].status === true){
+      if (this.models[m].status === true) {
         this.models[m].gameId = this.game.gameId
         this.gameProvider.addGamePlayer(this.models[m])
       }
@@ -108,6 +109,18 @@ export class ActivegamePage {
     //navigate back to start page
     this.navCtrl.setRoot(HometabPage)
     this.navCtrl.popToRoot()
+  }
+
+  toggleGroup(group) {
+    if (this.isGroupShown(group)) {
+      this.shownGroup = null;
+    } else {
+      this.shownGroup = group;
+    }
+  }
+
+  isGroupShown(group) {
+    return this.shownGroup === group;
   }
 
   ionViewDidLoad() {
