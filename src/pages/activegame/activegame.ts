@@ -123,6 +123,11 @@ export class ActivegamePage {
     return this.shownGroup === group;
   }
 
+  close(){
+    this.navCtrl.setRoot(HometabPage)
+    this.navCtrl.popToRoot()
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivegamePage');
     console.log(this.options)

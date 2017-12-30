@@ -2,6 +2,11 @@
 
     <ion-navbar>
         <ion-title>activegame</ion-title>
+        <ion-buttons end>
+                <button ion-button (click)="close()">
+                  close
+                </button>
+              </ion-buttons>
     </ion-navbar>
 </ion-header>
 
@@ -22,7 +27,7 @@
                                     <div *ngIf="option.status">
                                         <ion-item>
                                             <ion-label floating>Points</ion-label>
-                                            <ion-input type="text" class="form-control" name="points" [(ngModel)]="models[i].points"></ion-input>
+                                            <ion-input type="text" class="form-control" name="points" [(ngModel)]="models[i].points" value="5"></ion-input>
                                         </ion-item>
                                     </div>
                                 </div>
@@ -30,7 +35,7 @@
                                     <div *ngIf="option.status">
                                         <ion-item>
                                             <ion-label floating>Rebounds</ion-label>
-                                            <ion-input type="text" class="form-control" name="rebounds" [(ngModel)]="models[i].rebounds"></ion-input>
+                                            <ion-input type="text" class="form-control" name="rebounds" [(ngModel)]="models[i].rebounds" value=""></ion-input>
                                         </ion-item>
                                     </div>
                                 </div>
@@ -38,7 +43,7 @@
                                     <div *ngIf="option.status">
                                         <ion-item>
                                             <ion-label floating>Assists</ion-label>
-                                            <ion-input type="text" class="form-control" name="assists" [(ngModel)]="models[i].assists"></ion-input>
+                                            <ion-input type="text" class="form-control" name="assists" [(ngModel)]="models[i].assists" value=""></ion-input>
                                         </ion-item>
                                     </div>
                                 </div>
@@ -46,7 +51,7 @@
                                     <div *ngIf="option.status">
                                         <ion-item>
                                             <ion-label floating>Steals</ion-label>
-                                            <ion-input type="text" class="form-control" name="steals" [(ngModel)]="models[i].steals"></ion-input>
+                                            <ion-input type="text" class="form-control" name="steals" [(ngModel)]="models[i].steals" value=""></ion-input>
                                         </ion-item>
                                     </div>
                                 </div>
@@ -54,7 +59,7 @@
                                     <div *ngIf="option.status">
                                         <ion-item>
                                             <ion-label floating>Blocks</ion-label>
-                                            <ion-input type="text" class="form-control" name="blocks" [(ngModel)]="models[i].blocks"></ion-input>
+                                            <ion-input type="text" class="form-control" name="blocks" [(ngModel)]="models[i].blocks" value=""></ion-input>
                                         </ion-item>
                                     </div>
                                 </div>
@@ -62,7 +67,7 @@
                                     <div *ngIf="option.status">
                                         <ion-item>
                                             <ion-label floating>Turnovers</ion-label>
-                                            <ion-input type="text" class="form-control" name="turnovers" [(ngModel)]="models[i].turnovers"></ion-input>
+                                            <ion-input type="text" class="form-control" name="turnovers" [(ngModel)]="models[i].turnovers" value=""></ion-input>
                                         </ion-item>
                                     </div>
                                 </div>
