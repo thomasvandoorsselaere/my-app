@@ -9,7 +9,8 @@ export class GamePlayer {
         public steals?: string,
         public blocks?: string,
         public turnovers?: string,
-        public gameId?: string
+        public gameId?: string,
+        public status?: boolean
     )
     {
 

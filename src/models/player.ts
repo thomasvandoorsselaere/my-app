@@ -1,14 +1,8 @@
-import { Gameoptions } from "./gameoptions";
 
-export interface Player extends Gameoptions {
+export interface Player {
     id?: string;
     name?: string;
     team?: string;
-    points?: string
-    rebounds?: string
-    assists?: string
-    steals?: string
-    blocks?: string
-    turnovers?: string
+    status?: boolean;
     
 }

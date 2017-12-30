@@ -99,8 +99,10 @@ export class ActivegamePage {
 
     //adding players to the db
     for (let m in this.models) {
-      this.models[m].gameId = this.game.gameId
-      this.gameProvider.addGamePlayer(this.models[m])
+      if(this.models[m].status === true){
+        this.models[m].gameId = this.game.gameId
+        this.gameProvider.addGamePlayer(this.models[m])
+      }
     }
 
     //navigate back to start page
@@ -112,7 +114,7 @@ export class ActivegamePage {
     console.log('ionViewDidLoad ActivegamePage');
     console.log(this.options)
     this.filteredPlayers = this.filterplayers(this.team)
-    this.filteredPlayers.subscribe(players => _.forEach(players, (player) => { this.models.push({ name: player.name }) }))
+    this.filteredPlayers.subscribe(players => _.forEach(players, (player) => { this.models.push({ name: player.name, status: player.status }) }))
     this.filterOptions()
 
     console.log(this.models)

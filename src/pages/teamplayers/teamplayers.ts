@@ -23,35 +23,35 @@ export class TeamplayersPage {
   players: Observable<Player[]>
   playerDoc: AngularFirestoreDocument<Player>
   filteredPlayers: Observable<Player[]>
-  
-  player: Player ={
+
+  player: Player = {
   }
   team: Team
-  
+
 
   constructor(
-    private teamProvider: ProvidersTeamsProvider, 
+    private teamProvider: ProvidersTeamsProvider,
     public navCtrl: NavController,
     public afs: AngularFirestore,
     public viewCtrl: ViewController,
-    public alertCtrl: AlertController, 
-    public navParams: NavParams,) {
-      
-      this.playersCollection = this.afs.collection('players')
-      this.players = this.playersCollection.snapshotChanges().map(changes => {
-        return changes.map(a => {
-          const data = a.payload.doc.data() as Player
-          data.id = a.payload.doc.id
-          return data
-        })
+    public alertCtrl: AlertController,
+    public navParams: NavParams, ) {
+
+    this.playersCollection = this.afs.collection('players')
+    this.players = this.playersCollection.snapshotChanges().map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as Player
+        data.id = a.payload.doc.id
+        return data
       })
+    })
 
-      this.team = navParams.get("teamName")
+    this.team = navParams.get("teamName")
 
-      
+
   }
 
-  addplayerbutton(){
+  addplayerbutton() {
     let prompt = this.alertCtrl.create({
       title: 'Add player',
       message: "Enter a playersname",
@@ -74,7 +74,7 @@ export class TeamplayersPage {
             console.log('Saved clicked');
             console.log(this.player)
             console.log(data.name)
-            if(this.player.name != ''){
+            if (this.player.name != '') {
               this.player.name = data.player
               this.teamProvider.addPlayer(this.player, this.team)
               this.player.name = null
@@ -88,19 +88,11 @@ export class TeamplayersPage {
     prompt.present();
   }
 
-  // onSubmit(player, team){
-  //   if(this.player.name != ''){
-  //     this.teamProvider.addPlayer(this.player, this.team)
-  //     this.player.name = ''
-      
-  //   }
-  // }
-
-  playerDelete(player){
+  playerDelete(player) {
     this.teamProvider.deletePlayer(player);
   }
 
-  filterplayers(team){
+  filterplayers(team) {
     return this.players.map(x => x.filter(y => y.team === team))
   }
 
