@@ -77,8 +77,8 @@ export class TeamplayersPage {
             if(this.player.name != ''){
               this.player.name = data.player
               this.teamProvider.addPlayer(this.player, this.team)
-              this.player.name = ''
-              this.player.team = ''
+              this.player.name = null
+              this.player.team = null
               this.ionViewDidLoad()
             }
           }

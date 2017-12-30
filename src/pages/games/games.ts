@@ -28,9 +28,8 @@ gameCollection: AngularFirestoreCollection<Game>
 games: Observable<Game[]>
 gamePlayersCollection: AngularFirestoreCollection<GamePlayer>
 gamePlayers: Observable<GamePlayer[]>
-game: Game = {
-
-}
+game: Game = {}
+filteredGamePlayers: Observable<GamePlayer[]>
 
   constructor(
     public navCtrl: NavController,
@@ -78,9 +77,19 @@ game: Game = {
     modal.present()
   }
 
+  filterplayers(game){
+    return this.gamePlayers.map(x => x.filter(y => y.gameId === game))
+  }
+
   gameDelete(game: Game){
+    this.filteredGamePlayers = this.filterplayers(game)
+
     this.gameProvider.deleteGame(game);
-  
+    
+    
+    for (let i in this.filteredGamePlayers) {
+      this.gameProvider.deleteGamePlayer(this.filteredGamePlayers[i])
+    }
   }
 
   logout(){

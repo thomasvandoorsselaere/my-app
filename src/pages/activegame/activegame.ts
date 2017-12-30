@@ -27,7 +27,6 @@ export class ActivegamePage {
   team: Team
   filteredPlayers: Observable<Player[]>
   game: any = {}
-  public id : number = 0
   models: GamePlayer[] = []
   gameOptionPoints: Observable<Gameoptions[]>
   gameOptionAssists: Observable<Gameoptions[]>
@@ -73,40 +72,38 @@ export class ActivegamePage {
 
   getDate() {
     let date = new Date();
-    let month = date.getMonth(); 
+    let month = date.getMonth();
     let day = date.getDate();
     let year = date.getFullYear();
-    let formattedDate = day +"-"+ month +"-"+ year
+    let formattedDate = day + "-" + month + "-" + year
     return formattedDate
   }
 
-  filterOptions(){
-    this.gameOptionPoints = this.options.map(x => x.filter(y =>y.name === "points"))
-    this.gameOptionAssists = this.options.map(x => x.filter(y =>y.name === "assists"))
-    this.gameOptionRebounds = this.options.map(x => x.filter(y =>y.name === "rebounds"))
-    this.gameOptionSteals = this.options.map(x => x.filter(y =>y.name === "steals"))
-    this.gameOptionBlocks = this.options.map(x => x.filter(y =>y.name === "blocks"))
-    this.gameOptionTurnovers = this.options.map(x => x.filter(y =>y.name === "turnovers"))
+  filterOptions() {
+    this.gameOptionPoints = this.options.map(x => x.filter(y => y.name === "points"))
+    this.gameOptionAssists = this.options.map(x => x.filter(y => y.name === "assists"))
+    this.gameOptionRebounds = this.options.map(x => x.filter(y => y.name === "rebounds"))
+    this.gameOptionSteals = this.options.map(x => x.filter(y => y.name === "steals"))
+    this.gameOptionBlocks = this.options.map(x => x.filter(y => y.name === "blocks"))
+    this.gameOptionTurnovers = this.options.map(x => x.filter(y => y.name === "turnovers"))
   }
 
   submitForm(form: NgForm, game: Game) {
-    
+
     //adding the game to the db
-    this.game.gameId =  Date.now()
-    this.game.name = "Game "+ this.team +" "+this.getDate()
+    this.game.gameId = Date.now()
+    this.game.name = "Game " + this.team + " " + this.getDate()
     this.game.date = this.getDate()
     this.gameProvider.addGame(this.game)
-    
 
 
+    //adding players to the db
     for (let m in this.models) {
-        this.models[m].gameId = this.game.gameId
-        this.gameProvider.addGamePlayer(this.models[m])
+      this.models[m].gameId = this.game.gameId
+      this.gameProvider.addGamePlayer(this.models[m])
     }
-   
 
-
-    console.log(this.models)
+    //navigate back to start page
     this.navCtrl.setRoot(HometabPage)
     this.navCtrl.popToRoot()
   }

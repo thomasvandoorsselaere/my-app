@@ -19,11 +19,12 @@ export class ProvidersGameProvider {
   gameHistory: Observable<Game[]>
   gameCollection: AngularFirestoreCollection<Game>
   gamePlayerCollection: AngularFirestoreCollection<GamePlayer>
-  gamePlayersDoc: AngularFirestoreDocument<GamePlayer>
+  gamePlayerDoc: AngularFirestoreDocument<GamePlayer>
 
   gameDoc: AngularFirestoreDocument<Game>
   games: Observable<Game[]>
   gamePlayers: Observable<GamePlayer[]>
+
 
   // array doorsturen is niet correct je hebt de [0] waarde nodig van die array
 
@@ -83,9 +84,13 @@ export class ProvidersGameProvider {
     this.gamePlayerCollection.add(gameplayer)
   }
 
+  deleteGamePlayer(gameplayer: GamePlayer){
+    this.gamePlayerDoc = this.afs.doc(`gamePlayer/${gameplayer.id}`)
+    this.gamePlayerDoc.delete()
+  }
+
   deleteGame(game:Game){
     this.gameDoc = this.afs.doc(`game/${game.id}`)
-    // this.gamePlayersDoc = this.afs.doc(`gamePlayers/${game.date}`)
     this.gameDoc.delete()
   }
   
