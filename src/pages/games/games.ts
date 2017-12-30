@@ -78,11 +78,10 @@ export class GamesPage {
   gameDelete(game: Game) {
     this.filteredGamePlayers = this.filterplayers(game)
 
-    // this.gameProvider.deleteGame(game);
-    console.log(this.filteredGamePlayers)
+    this.gameProvider.deleteGame(game);
 
     for (let i in this.filteredGamePlayers) {
-      // this.gameProvider.deleteGamePlayer(this.filteredGamePlayers[i])
+      this.gameProvider.deleteGamePlayer(this.filteredGamePlayers[i])
     }
   }
 

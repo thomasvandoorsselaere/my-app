@@ -29,10 +29,10 @@
                                             <ion-label floating>Points</ion-label>
                                             <ion-label floating>{{player.points}}</ion-label>
                                             <ion-input type="number" step="1" value="0" class="form-control" name="points" [(ngModel)]="models[i].points"></ion-input>
-                                            <button ion-button type="button" item-right>
+                                            <button ion-button type="button" (click)="increase()" item-right>
                                                 <ion-icon name="add"></ion-icon>
                                             </button>
-                                            <button ion-button type="button" item-right>
+                                            <button ion-button type="button" (click)="decrease()"item-right>
                                                 <ion-icon name="remove"></ion-icon>
                                             </button>
                                         </ion-item>

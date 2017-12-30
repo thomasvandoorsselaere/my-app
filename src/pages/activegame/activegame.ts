@@ -128,6 +128,18 @@ export class ActivegamePage {
     this.navCtrl.popToRoot()
   }
 
+
+  increase(models){
+    alert('increase'+models.points)
+
+      models.points++
+
+  }
+
+  decrease(){
+    alert('decrease')
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivegamePage');
     console.log(this.options)

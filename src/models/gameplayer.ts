@@ -3,12 +3,12 @@ export class GamePlayer {
         public id?: string,
         public date?: Date,
         public name?: string,
-        public points?: string,
-        public rebounds?: string,
-        public assists?: string,
-        public steals?: string,
-        public blocks?: string,
-        public turnovers?: string,
+        public points?: number,
+        public rebounds?: number,
+        public assists?: number,
+        public steals?: number,
+        public blocks?: number,
+        public turnovers?: number,
         public gameId?: string,
         public status?: boolean
     )
