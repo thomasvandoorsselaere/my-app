@@ -29,7 +29,7 @@ export class GamedetailsPage {
   gamePlayers: Observable<GamePlayer[]>
   filteredPlayers: Observable<GamePlayer[]>
   // filteredPlayer: Observable<GamePlayer[]>
-  filteredPlayer: GamePlayer[]
+  filteredPlayer: Observable<GamePlayer[]>
 
   constructor(
     public navCtrl: NavController,
@@ -58,7 +58,7 @@ export class GamedetailsPage {
 
     this.gameId = navParams.get("gameName")
     this.gameID = navParams.get("gameID")
-    console.log(this.filteredPlayer)
+    
   }
 
 
@@ -74,16 +74,16 @@ export class GamedetailsPage {
   }
 
   filterPlayer(player) {
-    this.filteredPlayer = player
-    return this.filteredPlayer
+    this.filteredPlayer = this.filteredPlayers.map(x => x.filter(y => y.name === player))
+    this.filteredPlayer
   }
-
 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamedetailsPage');
     this.game = this.filtergames(this.gameId)
     this.filteredPlayers = this.filterPlayers(this.gameID)
+    
   }
 
 }

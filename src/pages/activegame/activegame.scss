@@ -1,8 +1,11 @@
-// page-activegame {
+.item.item-input {
+	border: none;
+	position: relative;
     
-//         .card-content{
-//             padding: 0px 16px;
-//             max-height: 0px;
-//         }
-//     }
-    
+    left: 0px;
+    top: 0px;
+    background-color: transparent;
+    width:100%;
+}
+.item.item-input span{width:auto;}
+.item.item-input input{width:100%;}

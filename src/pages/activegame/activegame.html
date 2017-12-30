@@ -27,15 +27,29 @@
                                     <div *ngIf="option.status">
                                         <ion-item>
                                             <ion-label floating>Points</ion-label>
-                                            <ion-input type="text" class="form-control" name="points" [(ngModel)]="models[i].points" value="5"></ion-input>
+                                            <ion-label floating>{{player.points}}</ion-label>
+                                            <ion-input type="number" step="1" value="0" class="form-control" name="points" [(ngModel)]="models[i].points"></ion-input>
+                                            <button ion-button type="button" item-right>
+                                                <ion-icon name="add"></ion-icon>
+                                            </button>
+                                            <button ion-button type="button" item-right>
+                                                <ion-icon name="remove"></ion-icon>
+                                            </button>
                                         </ion-item>
+
                                     </div>
                                 </div>
                                 <div *ngFor="let option of gameOptionRebounds | async ;">
                                     <div *ngIf="option.status">
                                         <ion-item>
                                             <ion-label floating>Rebounds</ion-label>
-                                            <ion-input type="text" class="form-control" name="rebounds" [(ngModel)]="models[i].rebounds" value=""></ion-input>
+                                            <ion-input type="number" step="1" value="0" class="form-control" name="rebounds" [(ngModel)]="models[i].rebounds"></ion-input>
+                                            <button ion-button item-right type="button">
+                                                <ion-icon name="add"></ion-icon>
+                                            </button>
+                                            <button ion-button item-right type="button">
+                                                <ion-icon name="remove"></ion-icon>
+                                            </button>
                                         </ion-item>
                                     </div>
                                 </div>
@@ -43,7 +57,13 @@
                                     <div *ngIf="option.status">
                                         <ion-item>
                                             <ion-label floating>Assists</ion-label>
-                                            <ion-input type="text" class="form-control" name="assists" [(ngModel)]="models[i].assists" value=""></ion-input>
+                                            <ion-input type="number" step="1" value="0" class="form-control" name="assists" [(ngModel)]="models[i].assists"></ion-input>
+                                            <button ion-button item-right type="button">
+                                                <ion-icon name="add"></ion-icon>
+                                            </button>
+                                            <button ion-button item-right type="button">
+                                                <ion-icon name="remove"></ion-icon>
+                                            </button>
                                         </ion-item>
                                     </div>
                                 </div>
@@ -51,7 +71,13 @@
                                     <div *ngIf="option.status">
                                         <ion-item>
                                             <ion-label floating>Steals</ion-label>
-                                            <ion-input type="text" class="form-control" name="steals" [(ngModel)]="models[i].steals" value=""></ion-input>
+                                            <ion-input type="number" step="1" value="0" class="form-control" name="steals" [(ngModel)]="models[i].steals"></ion-input>
+                                            <button ion-button item-right type="button">
+                                                <ion-icon name="add"></ion-icon>
+                                            </button>
+                                            <button ion-button item-right type="button">
+                                                <ion-icon name="remove"></ion-icon>
+                                            </button>
                                         </ion-item>
                                     </div>
                                 </div>
@@ -59,7 +85,13 @@
                                     <div *ngIf="option.status">
                                         <ion-item>
                                             <ion-label floating>Blocks</ion-label>
-                                            <ion-input type="text" class="form-control" name="blocks" [(ngModel)]="models[i].blocks" value=""></ion-input>
+                                            <ion-input type="number" step="1" value="0" class="form-control" name="blocks" [(ngModel)]="models[i].blocks"></ion-input>
+                                            <button ion-button item-right type="button">
+                                                <ion-icon name="add"></ion-icon>
+                                            </button>
+                                            <button ion-button item-right type="button">
+                                                <ion-icon name="remove"></ion-icon>
+                                            </button>
                                         </ion-item>
                                     </div>
                                 </div>
@@ -67,7 +99,13 @@
                                     <div *ngIf="option.status">
                                         <ion-item>
                                             <ion-label floating>Turnovers</ion-label>
-                                            <ion-input type="text" class="form-control" name="turnovers" [(ngModel)]="models[i].turnovers" value=""></ion-input>
+                                            <ion-input type="text" class="form-control" name="turnovers" [(ngModel)]="models[i].turnovers"></ion-input>
+                                            <button ion-button item-right type="button">
+                                                <ion-icon name="add"></ion-icon>
+                                            </button>
+                                            <button ion-button item-right type="button">
+                                                <ion-icon name="remove"></ion-icon>
+                                            </button>
                                         </ion-item>
                                     </div>
                                 </div>

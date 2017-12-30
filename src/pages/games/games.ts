@@ -24,12 +24,12 @@ import { GamePlayer } from '../../models/gameplayer';
 })
 export class GamesPage {
 
-gameCollection: AngularFirestoreCollection<Game>
-games: Observable<Game[]>
-gamePlayersCollection: AngularFirestoreCollection<GamePlayer>
-gamePlayers: Observable<GamePlayer[]>
-game: Game = {}
-filteredGamePlayers: Observable<GamePlayer[]>
+  gameCollection: AngularFirestoreCollection<Game>
+  games: Observable<Game[]>
+  gamePlayersCollection: AngularFirestoreCollection<GamePlayer>
+  gamePlayers: Observable<GamePlayer[]>
+  game: Game = {}
+  filteredGamePlayers: Observable<GamePlayer[]>
 
   constructor(
     public navCtrl: NavController,
@@ -40,63 +40,61 @@ filteredGamePlayers: Observable<GamePlayer[]>
     public app: App,
     public navParams: NavParams) {
 
-      this.gameCollection = this.afs.collection('game')
-      this.games = this.afs.collection('game').valueChanges()
+    this.gameCollection = this.afs.collection('game')
+    this.games = this.afs.collection('game').valueChanges()
 
-      this.games = this .gameCollection.snapshotChanges().map(changes => {
-        return changes.map(a => {
-          const data = a.payload.doc.data() as Game
-          data.id = a.payload.doc.id
-          return data
-        })
+    this.games = this.gameCollection.snapshotChanges().map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as Game
+        data.id = a.payload.doc.id
+        return data
       })
+    })
 
-      this.gamePlayersCollection = this.afs.collection(`gamePlayers`)
-      this.gamePlayers = this.gamePlayersCollection.snapshotChanges().map(changes => {
-        return changes.map(a => {
-          const data = a.payload.doc.data() as any
-          data.id = a.payload.doc.id
-          return data
-        })
+    this.gamePlayersCollection = this.afs.collection(`gamePlayers`)
+    this.gamePlayers = this.gamePlayersCollection.snapshotChanges().map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as any
+        data.id = a.payload.doc.id
+        return data
       })
+    })
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad GamesPage');
-
-    console.log(this.games)
-  }
-
-  gamedetail(game : Game){
-    let modalGameDetail = this.modelCtrl.create(GamedetailsPage,{gameName: game.id, gameID: game.gameId})
+  gamedetail(game: Game) {
+    let modalGameDetail = this.modelCtrl.create(GamedetailsPage, { gameName: game.id, gameID: game.gameId })
     modalGameDetail.present()
   }
 
-  newGame(){
+  newGame() {
     let modal = this.modelCtrl.create(GameteamPage)
     modal.present()
   }
 
-  filterplayers(game){
+  filterplayers(game) {
     return this.gamePlayers.map(x => x.filter(y => y.gameId === game.gameId))
   }
 
-  gameDelete(game: Game){
+  gameDelete(game: Game) {
     this.filteredGamePlayers = this.filterplayers(game)
 
-    this.gameProvider.deleteGame(game);
-    
-    
+    // this.gameProvider.deleteGame(game);
+    console.log(this.filteredGamePlayers)
+
     for (let i in this.filteredGamePlayers) {
-      this.gameProvider.deleteGamePlayer(this.filteredGamePlayers[i])
+      // this.gameProvider.deleteGamePlayer(this.filteredGamePlayers[i])
     }
   }
 
-  logout(){
-    this.afAuth.auth.signOut().then(()=> {
+  logout() {
+    this.afAuth.auth.signOut().then(() => {
       this.app.getRootNav().setRoot(LoginPage);
     })
   }
 
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad GamesPage');
+  }
 
 }

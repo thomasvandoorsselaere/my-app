@@ -35,7 +35,7 @@
 
   <br>
   <br>
-    <div *ngFor="let player of filteredPlayer">
+    <div *ngFor="let player of filteredPlayer |async; let i=index">
       <ion-list>
         <h2>Game stats: {{player.name}}</h2>
         <ion-item>Points: {{player.points}}</ion-item>
@@ -47,5 +47,6 @@
       </ion-list>
     </div>
 
-    json filteredplayer: {{filteredPlayer|json}}
+
+  filteredPlayer: {{filteredPlayer |json}}
 </ion-content>
