@@ -85,7 +85,7 @@ export class ProvidersGameProvider {
   }
 
   deleteGamePlayer(gameplayer: GamePlayer){
-    this.gamePlayerDoc = this.afs.doc(`gamePlayer/${gameplayer.id}`)
+    this.gamePlayerDoc = this.afs.doc(`gamePlayers/${gameplayer.id}`)
     this.gamePlayerDoc.delete()
   }
 

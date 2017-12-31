@@ -9,6 +9,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../login/login';
 import { ProvidersGameProvider } from '../../providers/providers-game/providers-game';
 import { GamePlayer } from '../../models/gameplayer';
+import * as _ from 'lodash';
+import { Team } from '../../models/team';
 
 /**
  * Generated class for the GamesPage page.
@@ -30,6 +32,8 @@ export class GamesPage {
   gamePlayers: Observable<GamePlayer[]>
   game: Game = {}
   filteredGamePlayers: Observable<GamePlayer[]>
+  toDeletePlayers: GamePlayer[] = []
+  team: Team
 
   constructor(
     public navCtrl: NavController,
@@ -71,18 +75,20 @@ export class GamesPage {
     modal.present()
   }
 
-  filterplayers(game) {
-    return this.gamePlayers.map(x => x.filter(y => y.gameId === game.gameId))
+  filterPlayers(game) {
+    return this.gamePlayers.map(x => x.filter(y => y.gameId === game))
   }
 
   gameDelete(game: Game) {
-    this.filteredGamePlayers = this.filterplayers(game)
 
-    this.gameProvider.deleteGame(game);
+     for (let i in this.toDeletePlayers){
+       if(this.toDeletePlayers[i].gameId === game.gameId){
+         this.gameProvider.deleteGamePlayer(this.toDeletePlayers[i])
+       }
+     }
 
-    for (let i in this.filteredGamePlayers) {
-      this.gameProvider.deleteGamePlayer(this.filteredGamePlayers[i])
-    }
+     this.gameProvider.deleteGame(game);
+
   }
 
   logout() {
@@ -94,6 +100,7 @@ export class GamesPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamesPage');
+    this.gamePlayers.subscribe(players => _.forEach(players, (player) => { this.toDeletePlayers.push({gameId: player.gameId, id: player.id }) }))
   }
 
 }
