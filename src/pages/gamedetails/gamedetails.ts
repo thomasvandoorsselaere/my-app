@@ -28,8 +28,7 @@ export class GamedetailsPage {
   gamePlayersCollection: AngularFirestoreCollection<GamePlayer>
   gamePlayers: Observable<GamePlayer[]>
   filteredPlayers: Observable<GamePlayer[]>
-  // filteredPlayer: Observable<GamePlayer[]>
-  filteredPlayer: Observable<GamePlayer[]>
+  shownGroup = null;
 
   constructor(
     public navCtrl: NavController,
@@ -58,9 +57,20 @@ export class GamedetailsPage {
 
     this.gameId = navParams.get("gameName")
     this.gameID = navParams.get("gameID")
-    
+
   }
 
+  toggleGroup(group) {
+    if (this.isGroupShown(group)) {
+      this.shownGroup = null;
+    } else {
+      this.shownGroup = group;
+    }
+  }
+
+  isGroupShown(group) {
+    return this.shownGroup === group;
+  }
 
   dismiss() {
     this.viewCtrl.dismiss();
@@ -73,17 +83,14 @@ export class GamedetailsPage {
     return this.gamePlayers.map(x => x.filter(y => y.gameId === game))
   }
 
-  filterPlayer(player) {
-    this.filteredPlayer = this.filteredPlayers.map(x => x.filter(y => y.name === player))
-    this.filteredPlayer
-  }
+
 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamedetailsPage');
     this.game = this.filtergames(this.gameId)
     this.filteredPlayers = this.filterPlayers(this.gameID)
-    
+
   }
 
 }

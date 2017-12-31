@@ -26,27 +26,52 @@
   </div>
   <br>
   <h4>Please select a player to see stats.</h4>
-  <ion-item>
-    <ion-label>Players</ion-label>
-    <ion-select [(ngModel)]="player" (ngModelChange)="filterPlayer(player)" >
-      <ion-option *ngFor="let player of filteredPlayers |async" [value]="player" >{{player.name}}</ion-option>
-    </ion-select>
-  </ion-item>
-
   <br>
-  <br>
-    <div *ngFor="let player of filteredPlayer |async; let i=index">
-      <ion-list>
-        <h2>Game stats: {{player.name}}</h2>
-        <ion-item>Points: {{player.points}}</ion-item>
-        <ion-item>Assists: {{player.assists}}</ion-item>
-        <ion-item>Rebounds: {{player.rebounds}}</ion-item>
-        <ion-item>Steals: {{player.steals}}</ion-item>
-        <ion-item>Blocks: {{player.blocks}}</ion-item>
-        <ion-item>Turnovers: {{player.turnovers}}</ion-item>
-      </ion-list>
+  <ion-list>
+    <div *ngFor="let player of filteredPlayers | async; let i=index">
+      <ion-item-divider color="light" text-wrap (click)="toggleGroup(i)" [ngClass]="{active: isGroupShown(i)}">
+        <h3>{{player.name}}
+          <ion-icon color="success" item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+        </h3>
+      </ion-item-divider>
+      <div *ngIf="isGroupShown(i)">
+        <div *ngIf="player.points">
+        <ion-item>
+          <ion-label>Points</ion-label>
+          <ion-label>{{player.points}}</ion-label>
+        </ion-item>
+      </div>
+      <div *ngIf="player.rebounds">
+        <ion-item>
+          <ion-label>Rebounds</ion-label>
+          <ion-label>{{player.rebounds}}</ion-label>
+        </ion-item>
+      </div>
+        <div *ngIf="player.assists">
+        <ion-item>
+          <ion-label>Assists</ion-label>
+          <ion-label>{{player.assists}}</ion-label>
+        </ion-item>
+      </div>
+        <div *ngIf="player.blocks">
+        <ion-item>
+          <ion-label>Blocks</ion-label>
+          <ion-label>{{player.blocks}}</ion-label>
+        </ion-item>
+      </div>
+        <div *ngIf="player.steals">
+        <ion-item>
+          <ion-label>Steals</ion-label>
+          <ion-label>{{player.steals}}</ion-label>
+        </ion-item>
+      </div>
+        <div *ngIf="player.turnovers">
+        <ion-item>
+          <ion-label>Turnovers</ion-label>
+          <ion-label>{{player.turnovers}}</ion-label>
+        </ion-item>
+        </div>
+      </div>
     </div>
-
-
-  filteredPlayer: {{filteredPlayer |json}}
+  </ion-list>
 </ion-content>
