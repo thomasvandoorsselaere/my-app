@@ -27,12 +27,11 @@
                                     <div *ngIf="option.status">
                                         <ion-item>
                                             <ion-label floating>Points</ion-label>
-                                            <ion-label floating>{{player.points}}</ion-label>
                                             <ion-input type="number" step="1" value="0" class="form-control" name="points" [(ngModel)]="models[i].points"></ion-input>
-                                            <button ion-button type="button" (click)="increase()" item-right>
+                                            <button ion-button type="button" (click)="increasePoints(i)" item-right>
                                                 <ion-icon name="add"></ion-icon>
                                             </button>
-                                            <button ion-button type="button" (click)="decrease()"item-right>
+                                            <button ion-button type="button" (click)="decreasePoints(i)" item-right>
                                                 <ion-icon name="remove"></ion-icon>
                                             </button>
                                         </ion-item>
@@ -44,10 +43,10 @@
                                         <ion-item>
                                             <ion-label floating>Rebounds</ion-label>
                                             <ion-input type="number" step="1" value="0" class="form-control" name="rebounds" [(ngModel)]="models[i].rebounds"></ion-input>
-                                            <button ion-button item-right type="button">
+                                            <button ion-button item-right type="button" (click)="increaseRebounds(i)">
                                                 <ion-icon name="add"></ion-icon>
                                             </button>
-                                            <button ion-button item-right type="button">
+                                            <button ion-button item-right type="button" (click)="decreaseRebounds(i)">
                                                 <ion-icon name="remove"></ion-icon>
                                             </button>
                                         </ion-item>
@@ -58,10 +57,10 @@
                                         <ion-item>
                                             <ion-label floating>Assists</ion-label>
                                             <ion-input type="number" step="1" value="0" class="form-control" name="assists" [(ngModel)]="models[i].assists"></ion-input>
-                                            <button ion-button item-right type="button">
+                                            <button ion-button item-right type="button" (click)="increaseAssists(i)">
                                                 <ion-icon name="add"></ion-icon>
                                             </button>
-                                            <button ion-button item-right type="button">
+                                            <button ion-button item-right type="button" (click)="decreaseAssists(i)">
                                                 <ion-icon name="remove"></ion-icon>
                                             </button>
                                         </ion-item>
@@ -72,10 +71,10 @@
                                         <ion-item>
                                             <ion-label floating>Steals</ion-label>
                                             <ion-input type="number" step="1" value="0" class="form-control" name="steals" [(ngModel)]="models[i].steals"></ion-input>
-                                            <button ion-button item-right type="button">
+                                            <button ion-button item-right type="button" (click)="increaseSteals(i)">
                                                 <ion-icon name="add"></ion-icon>
                                             </button>
-                                            <button ion-button item-right type="button">
+                                            <button ion-button item-right type="button" (click)="decreaseSteals(i)">
                                                 <ion-icon name="remove"></ion-icon>
                                             </button>
                                         </ion-item>
@@ -86,10 +85,10 @@
                                         <ion-item>
                                             <ion-label floating>Blocks</ion-label>
                                             <ion-input type="number" step="1" value="0" class="form-control" name="blocks" [(ngModel)]="models[i].blocks"></ion-input>
-                                            <button ion-button item-right type="button">
+                                            <button ion-button item-right type="button" (click)="increaseBlocks(i)">
                                                 <ion-icon name="add"></ion-icon>
                                             </button>
-                                            <button ion-button item-right type="button">
+                                            <button ion-button item-right type="button" (click)="decreaseBlocks(i)">
                                                 <ion-icon name="remove"></ion-icon>
                                             </button>
                                         </ion-item>
@@ -100,10 +99,10 @@
                                         <ion-item>
                                             <ion-label floating>Turnovers</ion-label>
                                             <ion-input type="text" class="form-control" name="turnovers" [(ngModel)]="models[i].turnovers"></ion-input>
-                                            <button ion-button item-right type="button">
+                                            <button ion-button item-right type="button" (click)="increaseTurnovers(i)">
                                                 <ion-icon name="add"></ion-icon>
                                             </button>
-                                            <button ion-button item-right type="button">
+                                            <button ion-button item-right type="button" (click)="decreaseTurnovers(i)">
                                                 <ion-icon name="remove"></ion-icon>
                                             </button>
                                         </ion-item>

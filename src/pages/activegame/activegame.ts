@@ -128,23 +128,65 @@ export class ActivegamePage {
     this.navCtrl.popToRoot()
   }
 
-
-  increase(models){
-    alert('increase'+models.points)
-
-      models.points++
-
+//increase decrease points
+  increasePoints(index){
+    this.models[index].points++
   }
 
-  decrease(){
-    alert('decrease')
+  decreasePoints(index){
+    this.models[index].points--
+  }
+
+//increase decrease rebounds
+  increaseRebounds(index){
+    this.models[index].rebounds++
+  }
+
+  decreaseRebounds(index){
+    this.models[index].rebounds--
+  }
+
+  //increase decrease assists
+  increaseAssists(index){
+    this.models[index].assists++
+  }
+
+  decreaseAssists(index){
+    this.models[index].assists--
+  }
+
+  //increase decrease steals
+  increaseSteals(index){
+    this.models[index].steals++
+  }
+
+  decreaseSteals(index){
+    this.models[index].steals--
+  }
+
+  //increase decrease blocks
+  increaseBlocks(index){
+    this.models[index].blocks++
+  }
+
+  decreaseBlocks(index){
+    this.models[index].blocks--
+  }
+
+  //increase decrease turnovers
+  increaseTurnovers(index){
+    this.models[index].turnovers++
+  }
+
+  decreaseTurnovers(index){
+    this.models[index].turnovers--
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivegamePage');
     console.log(this.options)
     this.filteredPlayers = this.filterplayers(this.team)
-    this.filteredPlayers.subscribe(players => _.forEach(players, (player) => { this.models.push({ name: player.name, status: player.status }) }))
+    this.filteredPlayers.subscribe(players => _.forEach(players, (player) => { this.models.push({ name: player.name, status: player.status, points: null, rebounds: null, assists: null, steals: null, blocks: null, turnovers:null }) }))
     this.filterOptions()
 
     console.log(this.models)
