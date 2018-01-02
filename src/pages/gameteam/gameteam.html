@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>gameteam</ion-title>
+    <ion-title>Please select your team</ion-title>
     <ion-buttons end>
       <button ion-button (click)="close()">
         close
@@ -19,7 +19,6 @@
 
 
 <ion-content padding>
-  <p>Please select your team.</p>
   <ion-list>
     <button ion-item *ngFor="let team of filteredTeams | async" (click)="teamPlayers(team)">{{team.name}}</button>
   </ion-list>

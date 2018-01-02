@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>gameplayers</ion-title>
+    <ion-title>Please select your players</ion-title>
     <ion-buttons end>
       <button ion-button (click)="close()">
         close
@@ -19,7 +19,6 @@
 
 
 <ion-content padding>
-  <p>Please select your players!</p>
   <ion-item *ngFor="let player of filteredPlayers | async">
     <ion-label>{{ player.name }}</ion-label>
     <ion-toggle [checked]="player.status" (ionChange)="selectedPlayers(player)"></ion-toggle>
