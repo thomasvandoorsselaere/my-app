@@ -65,6 +65,12 @@
           <ion-label>{{player.steals}}</ion-label>
         </ion-item>
       </div>
+      <div *ngIf="player.fouls">
+        <ion-item>
+          <ion-label>Fouls</ion-label>
+          <ion-label>{{player.fouls}}</ion-label>
+        </ion-item>
+      </div>
         <div *ngIf="player.turnovers">
         <ion-item>
           <ion-label>Turnovers</ion-label>

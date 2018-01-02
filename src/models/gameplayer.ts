@@ -9,6 +9,7 @@ export class GamePlayer {
         public steals?: number,
         public blocks?: number,
         public turnovers?: number,
+        public fouls?: number,
         public gameId?: string,
         public status?: boolean
     )

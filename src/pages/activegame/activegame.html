@@ -94,6 +94,20 @@
                                         </ion-item>
                                     </div>
                                 </div>
+                                <div *ngFor="let option of gameOptionFouls | async ;">
+                                    <div *ngIf="option.status">
+                                        <ion-item>
+                                            <ion-label floating>Fouls</ion-label>
+                                            <ion-input type="number" step="1" value="0" class="form-control" name="fouls" [(ngModel)]="models[i].fouls"></ion-input>
+                                            <button ion-button item-right type="button" (click)="increaseFouls(i)">
+                                                <ion-icon name="add"></ion-icon>
+                                            </button>
+                                            <button ion-button item-right type="button" (click)="decreaseFouls(i)">
+                                                <ion-icon name="remove"></ion-icon>
+                                            </button>
+                                        </ion-item>
+                                    </div>
+                                </div>
                                 <div *ngFor="let option of gameOptionTurnovers | async ;">
                                     <div *ngIf="option.status">
                                         <ion-item>

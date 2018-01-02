@@ -34,6 +34,7 @@ export class ActivegamePage {
   gameOptionSteals: Observable<Gameoptions[]>
   gameOptionBlocks: Observable<Gameoptions[]>
   gameOptionTurnovers: Observable<Gameoptions[]>
+  gameOptionFouls: Observable<Gameoptions[]>
   shownGroup = null;
 
 
@@ -87,6 +88,7 @@ export class ActivegamePage {
     this.gameOptionSteals = this.options.map(x => x.filter(y => y.name === "steals"))
     this.gameOptionBlocks = this.options.map(x => x.filter(y => y.name === "blocks"))
     this.gameOptionTurnovers = this.options.map(x => x.filter(y => y.name === "turnovers"))
+    this.gameOptionFouls = this.options.map(x => x.filter(y => y.name === "fouls"))
   }
 
   submitForm(form: NgForm, game: Game) {
@@ -182,15 +184,21 @@ export class ActivegamePage {
     this.models[index].turnovers--
   }
 
+  //increase decrease faults
+  increaseFouls(index){
+    this.models[index].fouls++
+  }
+
+  decreaseFouls(index){
+    this.models[index].fouls--
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivegamePage');
     console.log(this.options)
     this.filteredPlayers = this.filterplayers(this.team)
-    this.filteredPlayers.subscribe(players => _.forEach(players, (player) => { this.models.push({ name: player.name, status: player.status, points: null, rebounds: null, assists: null, steals: null, blocks: null, turnovers:null }) }))
+    this.filteredPlayers.subscribe(players => _.forEach(players, (player) => { this.models.push({ name: player.name, status: player.status, points: null, rebounds: null, assists: null, steals: null, blocks: null, turnovers:null, fouls:null }) }))
     this.filterOptions()
-
-    console.log(this.models)
-    console.log(this.gameOptionPoints)
 
   }
 }
