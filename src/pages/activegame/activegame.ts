@@ -76,8 +76,8 @@ export class ActivegamePage {
 
   getDate() {
     let date = new Date();
-    let month = date.getMonth();
-    let day = date.getDate();
+    let month = date.getMonth()+1;
+    let day = date.getDay();
     let year = date.getFullYear();
     let formattedDate = day + "-" + month + "-" + year
     return formattedDate
