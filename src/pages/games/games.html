@@ -20,7 +20,7 @@
 
 <ion-content padding>
   <ion-list no-border>
-    <ion-item *ngFor="let game of games | async">
+    <ion-item *ngFor="let game of filteredGames | async">
       <button ion-button color="dark" clear (click)="gamedetail(game)">{{game.name}}</button>
       <ion-icon name="trash" (click)="gameDelete(game)" item-end></ion-icon>
     </ion-item>

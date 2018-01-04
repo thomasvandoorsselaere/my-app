@@ -13,6 +13,7 @@ import { ProvidersGameProvider } from '../../providers/providers-game/providers-
 import { GamePlayer } from '../../models/gameplayer';
 import * as _ from 'lodash';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @IonicPage()
 @Component({
@@ -41,6 +42,7 @@ export class ActivegamePage {
   constructor(
     public renderer: Renderer,
     public navCtrl: NavController,
+    private afAuth: AngularFireAuth,
     public gameProvider: ProvidersGameProvider,
     public afs: AngularFirestore,
     public navParams: NavParams) {
@@ -96,6 +98,7 @@ export class ActivegamePage {
     //adding the game to the db
     this.game.gameId = Date.now()
     this.game.name = "Game " + this.team + " " + this.getDate()
+    this.game.userId = this.afAuth.auth.currentUser.uid
     this.game.date = this.getDate()
     this.gameProvider.addGame(this.game)
 

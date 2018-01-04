@@ -28,6 +28,7 @@ export class GamesPage {
 
   gameCollection: AngularFirestoreCollection<Game>
   games: Observable<Game[]>
+  filteredGames: Observable<Game[]>
   gamePlayersCollection: AngularFirestoreCollection<GamePlayer>
   gamePlayers: Observable<GamePlayer[]>
   game: Game = {}
@@ -91,6 +92,10 @@ export class GamesPage {
 
   }
 
+  filtergames() {
+    return this.games.map(x => x.filter(y => y.userId === this.afAuth.auth.currentUser.uid))
+  }
+
   logout() {
     this.afAuth.auth.signOut().then(() => {
       this.app.getRootNav().setRoot(LoginPage);
@@ -101,6 +106,7 @@ export class GamesPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamesPage');
     this.gamePlayers.subscribe(players => _.forEach(players, (player) => { this.toDeletePlayers.push({gameId: player.gameId, id: player.id }) }))
+    this.filteredGames = this.filtergames()
   }
 
 }
